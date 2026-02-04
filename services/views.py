@@ -4,4 +4,5 @@ from django.shortcuts import render
 def services(request):
     return render(request, 'services/services.html')
 
-# Create your views here.
+def service(request):
+    return render(request, 'services/service.html')
