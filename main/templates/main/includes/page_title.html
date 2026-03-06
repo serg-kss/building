@@ -1,0 +1,14 @@
+{% load static %}
+{% load i18n %}
+
+<div class="page-title dark-background" style="background-image: url({% static "assets/img/page-title-bg.jpg" %});">
+    <div class="container position-relative">
+        <h1>{{title_h1}}</h1>
+        <nav class="breadcrumbs">
+            <ol>
+                <li><a href="{% url "main:index" %}">Головна</a></li>
+                <li class="current">{{breadcrumbs}}</li>
+            </ol>
+        </nav>
+    </div>
+</div>
