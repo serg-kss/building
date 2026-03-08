@@ -6,9 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  {% block seo %}{% endblock seo %}
-
+  {% include "seo/includes/seo.html" %}
   <!-- Favicons -->
   <link href="{% static "assets/img/favicon.png" %}" rel="icon">
   <link href="{% static "assets/img/apple-touch-icon.png" %}" rel="apple-touch-icon">
@@ -43,6 +41,15 @@
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <div id="preloader"></div>
+
+  <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Your Company",
+    "url": "{{ request.build_absolute_uri }}"
+    }
+  </script>
 
   <script src="{% static "assets/vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
   <script src="{% static "assets/vendor/aos/aos.js" %}"></script>

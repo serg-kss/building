@@ -1,16 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views import View
-from django.contrib import messages
 from django.http import JsonResponse
 
-from main.models import ContactMessages, HomePageSeo
+from main.models import ContactMessages, HomePage
 
 class Home(View):
 
     def get(self, request):
 
-        page = HomePageSeo.objects.first()
-        slides = page.slides.all()
+        page = HomePage.objects.first()
+        slides = page.slides.all() if page else []
 
         context = {
             "page": page,
@@ -77,5 +76,16 @@ class Contact(View):
         return JsonResponse({"status": "success"})
 
 
-def about(request):
-    return render(request, 'main/about.html')
+class About(View):
+
+    def get(self, request):
+
+        #page = HomePageSeo.objects.first()
+        #slides = page.slides.all()
+
+        context = {
+            "title_h1": "Про компанію",
+            "breadcrumbs": "Про компанію",
+        }
+
+        return render(request, "main/about.html", context)

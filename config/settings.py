@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    'seo',
     'main.apps.MainConfig',
     'blog',
     'services',
@@ -72,6 +74,10 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+TEMPLATES[0]["OPTIONS"]["context_processors"] += [
+    "seo.context_processors.seo"
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
@@ -151,3 +157,83 @@ else:
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+JAZZMIN_SETTINGS = {
+
+    "site_title": "Building Admin",
+    "site_header": "Building CMS",
+    "site_brand": "Building",
+
+    "welcome_sign": "Керування сайтом",
+
+    "site_logo": None,
+    "login_logo": None,
+
+    "show_sidebar": True,
+    "navigation_expanded": True,
+
+    "hide_apps": [],
+    "hide_models": [],
+
+    "order_with_respect_to": [
+        "main",
+        "services",
+        "portfolio",
+        "seo",
+    ],
+
+    "icons": {
+
+        "auth.user": "fas fa-user",
+
+        "main.HomePage": "fas fa-home",
+        "main.AboutPage": "fas fa-building",
+        "main.ContactMessages": "fas fa-envelope",
+        "main.SocialMedia": "fas fa-share-alt",
+
+        "services.Service": "fas fa-tools",
+
+        "portfolio.Portfolio": "fas fa-images",
+
+        "seo.PageSEO": "fas fa-search",
+    },
+
+    "topmenu_links": [
+
+        {"name": "Сайт", "url": "/", "new_window": True},
+
+        {"model": "main.HomePage"},
+        {"model": "main.AboutPage"},
+
+    ],
+
+    "usermenu_links": [
+        {"name": "Перейти на сайт", "url": "/", "new_window": True},
+    ],
+
+}
+
+JAZZMIN_UI_TWEAKS = {
+
+    "theme": "flatly",
+
+    "navbar_small_text": False,
+    "sidebar_small_text": False,
+
+    "brand_small_text": False,
+
+    "accent": "accent-primary",
+
+    "navbar": "navbar-white navbar-light",
+    "no_navbar_border": False,
+
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+
+    "sidebar_nav_child_indent": True,
+
+    "footer_fixed": False,
+
+}

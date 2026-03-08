@@ -3,6 +3,8 @@ from django.urls import include, path, re_path
 from django.conf import settings
 from django.views.static import serve
 
+from seo.views import robots
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -10,6 +12,7 @@ urlpatterns = [
     path("", include(("blog.urls", "blog"), namespace="blog")),
     path("", include(("services.urls", "services"), namespace="services")),
     path("", include(("portfolio.urls", "portfolio"), namespace="portfolio")),
+    path("robots.txt", robots)
 ]
 
 # 🔥 КОСТЫЛЬ ДЛЯ MEDIA (в самом конце!)

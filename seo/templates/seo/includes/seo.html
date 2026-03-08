@@ -1,0 +1,20 @@
+{% if seo %}
+
+<title>{{ seo.title }}</title>
+
+<meta name="description" content="{{ seo.description }}">
+
+<link rel="canonical" href="{{ seo.canonical|default:request.build_absolute_uri }}">
+
+<meta property="og:title" content="{{ seo.og_title|default:seo.title }}">
+<meta property="og:description" content="{{ seo.og_description|default:seo.description }}">
+
+{% if seo.og_image %}
+<meta property="og:image" content="{{ seo.og_image.url }}">
+{% endif %}
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ seo.og_title|default:seo.title }}">
+<meta name="twitter:description" content="{{ seo.og_description|default:seo.description }}">
+
+{% endif %}
