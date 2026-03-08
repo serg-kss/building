@@ -15,6 +15,10 @@ urlpatterns = [
     path("robots.txt", robots)
 ]
 
+urlpatterns += [
+    path("tinymce/", include("tinymce.urls")),
+]
+
 # 🔥 КОСТЫЛЬ ДЛЯ MEDIA (в самом конце!)
 urlpatterns += [
     re_path(r"^media/(?P<path>.*)$", serve, {

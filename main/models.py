@@ -161,4 +161,73 @@ class AboutPage(models.Model):
         if not self.pk and AboutPage.objects.exists():
             raise ValueError("Може бути тільки одна сторінка")
         return super().save(*args, **kwargs)    
+
+
+class TeamAboutPage(models.Model):
+
+    page = models.ForeignKey(
+        AboutPage,
+        on_delete=models.CASCADE,
+        related_name="team"
+    )
+
+    team_name = models.CharField("Імʼя", max_length=150)
+    team_position = models.CharField("Посада", max_length=150)
+    team_description = models.CharField("Детальна інформація", max_length=350)
+    twitter = models.URLField("twitter", blank=True)
+    facebook = models.URLField("facebook", blank=True)
+    instagram = models.URLField("instagram", blank=True)
+    linkedin = models.URLField("linkedin", blank=True)
+    team_img = models.ImageField(
+        "Зображення",
+        upload_to="home_about_team/"
+    )
+    order = models.PositiveIntegerField(
+        "Порядок",
+        default=0
+    )
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if self.team_img:
+            compress_image(self.team_img.path, (1920, 900))
+
+    class Meta:
+        verbose_name = "Учасник команди"
+        verbose_name_plural = "Учасники команди"
+
+    def __str__(self):
+        return f"{self.order} {self.team_name}"
     
+class TestimonialsAboutPage(models.Model):
+
+    page = models.ForeignKey(
+        AboutPage,
+        on_delete=models.CASCADE,
+        related_name="testimonials"
+    )
+
+    testimonials_name = models.CharField("Імʼя", max_length=150)
+    testimonials_position = models.CharField("Посада", max_length=150)
+    testimonials_message = models.CharField("Відгук")
+    testimonials_img = models.ImageField(
+        "Аватар",
+        upload_to="home_about_testimonials/"
+    )
+    order = models.PositiveIntegerField(
+        "Порядок",
+        default=0
+    )
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if self.testimonials_img:
+            compress_image(self.testimonials_img.path, (1920, 900))
+
+    class Meta:
+        verbose_name = "Відгук"
+        verbose_name_plural = "Відгуки"
+
+    def __str__(self):
+        return f"{self.order} {self.testimonials_name}"

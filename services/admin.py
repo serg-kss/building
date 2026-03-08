@@ -1,3 +1,10 @@
 from django.contrib import admin
+from adminsortable2.admin import SortableAdminBase
+from services.models import Service
 
-# Register your models here.
+@admin.register(Service)
+class ServiceAdmin(admin.ModelAdmin, SortableAdminBase,):
+    class Media:
+        css = {
+            "all": ("assets/css/admin.css",)
+        }

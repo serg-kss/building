@@ -28,12 +28,81 @@
 
 }
 
-/* скрываем сортировку */
-thead th.sorting {
+/* desktop */
+.tox-tinymce {
+    max-width: 700px !important;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+
+    .tox-tinymce {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+}
+
+/* основной контейнер */
+.tox-tinymce {
+    background: #2B3035 !important;
+    border-color: #3a4047 !important;
+}
+
+/* верхнее меню */
+.tox-menubar,
+.tox-menubar + .tox-toolbar,
+.tox-editor-header {
+    background: #2B3035 !important;
+}
+
+/* кнопки меню (Файл, Формат и тд) */
+.tox-mbtn {
+    background: #2B3035 !important;
+}
+
+/* toolbar */
+.tox-toolbar,
+.tox-toolbar__primary {
+    background: #2B3035 !important;
+}
+
+/* группы кнопок */
+.tox-toolbar__group {
+    background: #2B3035 !important;
+}
+
+/* кнопки */
+.tox-tbtn {
+    background: #2B3035 !important;
+}
+
+/* hover */
+.tox-tbtn:hover,
+.tox-mbtn:hover {
+    background: #343a40 !important;
+}
+
+/* активные кнопки */
+.tox-tbtn--enabled,
+.tox-tbtn--active {
+    background: #343a40 !important;
+}
+
+/* нижняя панель */
+.tox-statusbar {
+    background: #2B3035 !important;
+}
+
+/* редактор */
+.tox-edit-area iframe {
+    background: #2B3035 !important;
+}
+
+.tox-promotion {
     display: none !important;
 }
 
-/* скрываем панель действий */
-.actions {
+.tox-statusbar__branding {
     display: none !important;
 }

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.http import JsonResponse
 
-from main.models import ContactMessages, HomePage
+from main.models import AboutPage, ContactMessages, HomePage
 
 class Home(View):
 
@@ -80,12 +80,16 @@ class About(View):
 
     def get(self, request):
 
-        #page = HomePageSeo.objects.first()
-        #slides = page.slides.all()
+        page = AboutPage.objects.first()
+        team = page.team.all() if page else []
+        testimonials = page.testimonials.all() if page else []
 
         context = {
-            "title_h1": "Про компанію",
+            "title_h1": page.h1,
             "breadcrumbs": "Про компанію",
+            "page": page,
+            "team": team,
+            "testimonials": testimonials
         }
 
         return render(request, "main/about.html", context)

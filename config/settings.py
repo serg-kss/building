@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'blog',
     'services',
     'portfolio',
+
+    "tinymce",
 ]
 
 MIDDLEWARE = [
@@ -237,3 +239,56 @@ JAZZMIN_UI_TWEAKS = {
     "footer_fixed": False,
 
 }
+
+TINYMCE_DEFAULT_CONFIG = {
+
+    "height": 500,
+    "width": "auto",
+    "menubar": True,
+
+    "license_key": "gpl",
+
+    "skin": "oxide-dark",
+    "content_css": "dark",
+
+    "plugins": """
+        advlist autolink lists link image charmap preview anchor
+        searchreplace visualblocks code fullscreen
+        insertdatetime media table help wordcount
+    """,
+
+    "toolbar": """
+        undo redo | blocks |
+        bold italic underline |
+        alignleft aligncenter alignright alignjustify |
+        bullist numlist outdent indent |
+        link image media table |
+        removeformat | code fullscreen
+    """,
+
+    "toolbar_mode": "sliding",
+
+    "image_caption": True,
+    "image_advtab": True,
+
+    "automatic_uploads": True,
+
+    "file_picker_types": "image",
+
+    "mobile": {
+        "toolbar_mode": "scrolling"
+    },
+
+    "content_style": """
+        body {
+            background: #2B3035;
+            color: #e9ecef;
+            font-family: Arial, sans-serif;
+            font-size:14px
+        }
+    """,
+}
+TINYMCE_DEFAULT_CONFIG["image_dimensions"] = False
+TINYMCE_DEFAULT_CONFIG["image_class_list"] = [
+    {"title": "Responsive", "value": "img-fluid"},
+]
