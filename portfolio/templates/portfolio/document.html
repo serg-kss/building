@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+  {% include "includes/header.html" %}
+{% endblock header %}
+
+{% block content %}
+  {% include "main/includes/page_title.html" %}
+  <section class="container">
+    <p>{{document.doc_content|safe}}</p>
+  </section>
+{% endblock content %}

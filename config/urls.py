@@ -9,9 +9,9 @@ from seo.views import robots
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(("main.urls", "main"), namespace="main")),
-    path("", include(("blog.urls", "blog"), namespace="blog")),
     path("", include(("services.urls", "services"), namespace="services")),
     path("", include(("portfolio.urls", "portfolio"), namespace="portfolio")),
+    path("cookies/", include("cookie_consent.urls")),
     path("robots.txt", robots)
 ]
 

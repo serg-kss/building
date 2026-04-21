@@ -1,108 +1,274 @@
-/* текстовые поля */
+.tox-tinymce {
+    background-color: #212529 !important;
+    border: 1px solid #495057 !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+}
+
+
+.tox .tox-menubar {
+    background-color: #212529 !important;
+    border-bottom: 1px solid #495057 !important;
+}
+
+
+.tox .tox-mbtn {
+    background-color: #343a40 !important;
+    color: #f8f9fa !important;
+}
+
+.tox .tox-mbtn:hover {
+    background-color: #495057 !important;
+}
+
+
+.tox .tox-toolbar,
+.tox .tox-toolbar__primary {
+    background-color: #212529 !important;
+    border-bottom: 1px solid #495057 !important;
+}
+
+
+.tox .tox-tbtn {
+    background-color: #343a40 !important;
+    color: #f8f9fa !important;
+}
+
+.tox .tox-tbtn:hover {
+    background-color: #495057 !important;
+}
+
+
+.tox .tox-tbtn--enabled,
+.tox .tox-tbtn--active {
+    background-color: #495057 !important;
+}
+
+
+.tox .tox-menu {
+    background-color: #212529 !important;
+    border: 1px solid #495057 !important;
+}
+
+
+.tox .tox-collection__item {
+    color: #f8f9fa !important;
+}
+
+.tox .tox-collection__item:hover,
+.tox .tox-collection__item--active {
+    background-color: #495057 !important;
+}
+
+.tox .tox-statusbar {
+    background-color: #212529 !important;
+    border-top: 1px solid #495057 !important;
+}
+
+
+.tox .tox-promotion {
+    display: none !important;
+}
+
+
+.tox :focus {
+    outline: none !important;
+}
+
+.tox-tinymce:focus-within {
+    box-shadow: none !important;
+    border-color: #495057 !important;
+}
+
+.tox .tox-editor-header {
+    border-bottom: 1px solid #495057 !important;
+}
+
+
+.tox .tox-toolbar-overlord {
+    border-bottom: 1px solid #495057 !important;
+}
+
+
+.tox .tox-edit-area__iframe {
+    border-top: 1px solid #495057 !important;
+}
+
+
+.tox .tox-toolbar,
+.tox .tox-menubar {
+    border-color: #495057 !important;
+}
+
+
+.tox-tinymce {
+    outline: none !important;
+}
+
+
+.tox .tox-editor-header {
+    padding: 0 !important;
+}
+
+
+.tox:not(.tox-tinymce-inline) .tox-editor-header {
+    padding: 0 !important;
+}
+
+
+.tox .tox-menubar+.tox-toolbar,
+.tox .tox-menubar+.tox-toolbar-overlord {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+}
+
+
+.tox .tox-toolbar-overlord {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group input[type="url"],
-.form-group textarea {
-    width: 100%;
-    max-width: 700px;
-}
+.form-group input[type="number"],
+.form-group input[type="password"],
+.form-group textarea,
+.form-group select {
 
-/* числа компактные */
-.form-group input[type="number"] {
-    width: 120px;
-}
-
-/* адаптация под телефон */
-@media (max-width: 768px) {
-
-    .form-group input[type="text"],
-    .form-group input[type="email"],
-    .form-group input[type="url"],
-    .form-group textarea {
-        max-width: 100%;
-    }
-
-    .form-group input[type="number"] {
-        width: 100%;
-    }
+    width: 100% !important;
+    max-width: 100% !important;
 
 }
 
-/* desktop */
+
+.field-box input,
+.field-box textarea,
+.field-box select {
+
+    width: 100% !important;
+    max-width: 100% !important;
+
+}
+
+
+.field-slug input {
+
+    width: 100% !important;
+
+}
+
+
 .tox-tinymce {
-    max-width: 700px !important;
+
+    width: 100% !important;
+
 }
 
-/* mobile */
+
 @media (max-width: 768px) {
 
-    .tox-tinymce {
-        max-width: 100% !important;
+    .form-group,
+    .field-box {
+
         width: 100% !important;
+
+    }
+
+    input,
+    textarea,
+    select {
+
+        width: 100% !important;
+
     }
 
 }
 
-/* основной контейнер */
-.tox-tinymce {
-    background: #2B3035 !important;
-    border-color: #3a4047 !important;
+
+.tox .tox-toolbar__overflow,
+.tox .tox-toolbar__primary {
+
+    background-color: #212529 !important;
+
+    background-image: none !important;
+
 }
 
-/* верхнее меню */
-.tox-menubar,
-.tox-menubar + .tox-toolbar,
-.tox-editor-header {
-    background: #2B3035 !important;
+
+.tox .tox-toolbar__overflow {
+
+    border-top: 1px solid #495057 !important;
 }
 
-/* кнопки меню (Файл, Формат и тд) */
-.tox-mbtn {
-    background: #2B3035 !important;
+
+.tox .tox-toolbar__overflow .tox-tbtn {
+
+    background-color: #343a40 !important;
+    color: #f8f9fa !important;
+
 }
 
-/* toolbar */
-.tox-toolbar,
-.tox-toolbar__primary {
-    background: #2B3035 !important;
+.tox .tox-toolbar__overflow .tox-tbtn:hover {
+
+    background-color: #495057 !important;
+
 }
 
-/* группы кнопок */
-.tox-toolbar__group {
-    background: #2B3035 !important;
+.tox .tox-toolbar__overflow .tox-collection__item {
+
+    background-color: #212529 !important;
 }
 
-/* кнопки */
-.tox-tbtn {
-    background: #2B3035 !important;
+.tox .tox-toolbar__overflow .tox-collection__item:hover {
+
+    background-color: #495057 !important;
 }
 
-/* hover */
-.tox-tbtn:hover,
-.tox-mbtn:hover {
-    background: #343a40 !important;
-}
-
-/* активные кнопки */
-.tox-tbtn--enabled,
-.tox-tbtn--active {
-    background: #343a40 !important;
-}
-
-/* нижняя панель */
-.tox-statusbar {
-    background: #2B3035 !important;
-}
-
-/* редактор */
-.tox-edit-area iframe {
-    background: #2B3035 !important;
-}
-
-.tox-promotion {
+.brand-link .brand-image {
     display: none !important;
 }
 
-.tox-statusbar__branding {
+.brand-link {
+    padding-left: 0.8rem !important;
+}
+
+footer.app-footer  {
     display: none !important;
+}
+
+.logo-dark {
+    width: 80%;
+}
+
+.card-tools.text-sm {
+    font-size: 0;
+}
+
+.card-tools.text-sm i {
+    font-size: 12px;
+}
+
+.card-tools.text-sm::after {
+    content: "";
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.sorting {
+    visibility: hidden;
+}
+
+.djn-checkbox-select-all {
+    visibility: hidden;
+}
+
+.dataTables_info {
+    visibility: hidden;
+}
+
+#changelist-search {
+    visibility: hidden;
 }

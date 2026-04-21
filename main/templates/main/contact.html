@@ -13,81 +13,113 @@
     <!-- Contact Section -->
     <section id="contact" class="contact section">
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-6">
-            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
-              <i class="bi bi-geo-alt"></i>
-              <h3>Адреса</h3>
-              <p class="text-center">{{site_address}}, {{site_city}}</p>
+      <div class="container">
+        <div class="contact-wrapper">
+          <div class="contact-info-panel">
+            <div class="contact-info-header">
+              <h3>Contact Information</h3>
+              <p>Dignissimos deleniti accusamus rerum voluptate. Dignissimos rerum sit maiores reiciendis voluptate inventore ut.</p>
             </div>
-          </div><!-- End Info Item -->
 
-          <div class="col-lg-3 col-md-6">
-            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
-              <i class="bi bi-telephone"></i>
-              <h3>Телефон</h3>
-              <p>{{site_phone}}</p>
-            </div>
-          </div><!-- End Info Item -->
-
-          <div class="col-lg-3 col-md-6">
-            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="400">
-              <i class="bi bi-envelope"></i>
-              <h3>Email</h3>
-              <p>{{site_email}}</p>
-            </div>
-          </div><!-- End Info Item -->
-
-        </div>
-
-        <div class="row gy-4 mt-1">
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-            {{site_map | safe}}
-          </div><!-- End Google Maps -->
-
-          <div class="col-lg-6">
-            <form action="{% url "main:contact" %}" method="POST" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
-              {% csrf_token %}
-              <div class="row gy-4">
-
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Ваше Імʼя" required="">
+            <div class="contact-info-cards">
+              <div class="info-card">
+                <div class="icon-container">
+                  <i class="bi bi-pin-map-fill"></i>
                 </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Ваш Email" required="">
+                <div class="card-content">
+                  <h4>Ми знаходимось:</h4>
+                  <p>{{site_address}}, {{site_city}}</p>
                 </div>
-
-                <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Тема" required="">
-                </div>
-
-                <input type="text" name="website" style="display:none">
-
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Повідомлення" required=""></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Загрузка</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Ваше повідомлення відправлено. Дякуємо!</div>
-
-                  <button type="submit">Відправити</button>
-                </div>
-
               </div>
-            </form>
-          </div><!-- End Contact Form -->
 
+              <div class="info-card">
+                <div class="icon-container">
+                  <i class="bi bi-envelope-open"></i>
+                </div>
+                <div class="card-content">
+                  <h4>Email:</h4>
+                  <p>{{site_email}}</p>
+                </div>
+              </div>
+
+              <div class="info-card">
+                <div class="icon-container">
+                  <i class="bi bi-telephone-fill"></i>
+                </div>
+                <div class="card-content">
+                  <h4>Тел:</h4>
+                  <p>{{site_phone}}</p>
+                </div>
+              </div>
+
+              <div class="info-card">
+                <div class="icon-container">
+                  <i class="bi bi-clock-history"></i>
+                </div>
+                <div class="card-content">
+                  <h4>Ми працюємо:</h4>
+                  <p>Пн-Пт: 9AM - 7PM</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="social-links-panel">
+              <h5>Follow Us</h5>
+              <div class="social-icons">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-twitter-x"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-linkedin"></i></a>
+                <a href="#"><i class="bi bi-youtube"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form-panel">
+            <div class="map-container">
+              {{site_map | safe}}
+            </div>
+
+            <div class="form-container">
+              <h3>Send Us a Message</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipiscing elit mauris hendrerit faucibus imperdiet nec eget felis.</p>
+
+              <form action="forms/contact.php" method="post" class="php-email-form">
+                {% csrf_token %}
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="nameInput" name="name" placeholder="Ваше Імʼя" required="">
+                  <label for="nameInput">Ваше Імʼя</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="emailInput" name="email" placeholder="Email" required="">
+                  <label for="emailInput">Email</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="subjectInput" name="subject" placeholder="Тема" required="">
+                  <label for="subjectInput">Тема</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <textarea class="form-control" id="messageInput" name="message" rows="5" placeholder="Повідомлення" style="height: 150px" required=""></textarea>
+                  <label for="messageInput">Повідомлення</label>
+                </div>
+
+                <div class="my-3">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                </div>
+
+                <div class="d-grid">
+                  <button type="submit" class="btn-submit">Відправити <i class="bi bi-send-fill ms-2"></i></button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-
       </div>
-
     </section><!-- /Contact Section -->
-    
 
 {% endblock content %}

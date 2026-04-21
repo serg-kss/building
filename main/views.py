@@ -1,19 +1,28 @@
 from django.shortcuts import render
 from django.views import View
 from django.http import JsonResponse
-
-from main.models import AboutPage, ContactMessages, HomePage
+from django.core.paginator import Paginator
+from main.models import AboutPage, ContactMessages, HomePage, Terms as T, Privacy as P, Gallery as G
+from portfolio.models import Portfolio
+from services.models import Service
 
 class Home(View):
 
     def get(self, request):
 
         page = HomePage.objects.first()
-        slides = page.slides.all() if page else []
+        services = Service.objects.all()
+        portfolio = Portfolio.objects.all()
+        about = AboutPage.objects.first()
+        testimonials = about.testimonials.all() if about else []
+        team = about.team.all() if page else []
 
         context = {
             "page": page,
-            "slides": slides,
+            "services": services,
+            "portfolio": portfolio,
+            "testimonials": testimonials,
+            "team": team
         }
 
         return render(request, "main/index.html", context)
@@ -81,15 +90,90 @@ class About(View):
     def get(self, request):
 
         page = AboutPage.objects.first()
-        team = page.team.all() if page else []
-        testimonials = page.testimonials.all() if page else []
+        certificates_img = page.images.all() if page else []
 
         context = {
-            "title_h1": page.h1,
+            "title_h1": page.h1_about if page else "",
             "breadcrumbs": "Про компанію",
             "page": page,
-            "team": team,
-            "testimonials": testimonials
+            "certificates_img": certificates_img,
         }
 
         return render(request, "main/about.html", context)
+
+
+class Team(View):
+
+    def get(self, request):
+
+        page = AboutPage.objects.first()
+        team = page.team.all() if page else []
+
+        context = {
+            "title_h1": page.h1_team if page else "",
+            "breadcrumbs": "Команда",
+            "team": team,
+        }
+
+        return render(request, "main/team.html", context)
+    
+
+class Quote(View):
+
+    def get(self, request):
+
+        context = {
+            "title_h1": "quote",
+            "breadcrumbs": "quote",
+        }
+
+        return render(request, "main/quote.html", context)
+    
+
+class Terms(View):
+
+    def get(self, request):
+
+        page = T.objects.first()
+
+        context = {
+            "title_h1": page.h1 if page else "",
+            "breadcrumbs": "Terms",
+            "page": page
+        }
+
+        return render(request, "main/terms.html", context)
+    
+
+class Privacy(View):
+
+    def get(self, request):
+
+        page = P.objects.first()
+
+        context = {
+            "title_h1": page.h1 if page else "",
+            "breadcrumbs": "Privacy",
+            "page": page
+        }
+
+        return render(request, "main/privacy.html", context)
+    
+
+
+class Gallery(View):
+
+    def get(self, request):
+
+        photos_list = G.objects.all()
+        paginator = Paginator(photos_list, 9)  
+        page_number = request.GET.get("page")
+        photos = paginator.get_page(page_number)
+
+        context = {
+            "title_h1": "Галерея",
+            "breadcrumbs": "Галерея",
+            "photos": photos
+        }
+
+        return render(request, "main/gallery.html", context)

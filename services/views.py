@@ -1,20 +1,23 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
-from .models import Service
+from django.views.generic import View, DetailView
+from .models import Service, ServicePage
 
 
-class ServicesView(ListView):
+class ServicesView(View):
 
-    model = Service
-    template_name = "services/services.html"
-    context_object_name = "services"
+    def get(self, request):
 
-    def get_context_data(self, **kwargs):
+        services_list = Service.objects.all()
+        settings = ServicePage.objects.first()
 
-        context = super().get_context_data(**kwargs)
-        context["title_h1"] = "Наші сервіси"
-        context["breadcrumbs"] = "Сервіси"
-        return context    
+        context = {
+            "title_h1": settings.h1 if settings else "",
+            "breadcrumbs": "Наші послуги",
+            "services_list": services_list,
+            "settings": settings,
+        }
+
+        return render(request, "services/services.html", context)
 
 
 

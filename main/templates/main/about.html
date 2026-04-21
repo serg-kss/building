@@ -12,300 +12,69 @@
     <!-- About Section -->
     <section id="about" class="about section">
 
-      <div class="container">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="row position-relative">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <div class="about-content" data-aos="fade-right" data-aos-delay="200">
+              <h2>{{page.h2}}</h2>
+              <p>{{page.history_text|safe}}</p>
+              <div class="achievement-boxes row g-4 mt-4">
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+                  <div class="achievement-box">
+                    <h3>{{page.years_number_statistics}}+</h3>
+                    <p>Years Experience</p>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="400">
+                  <div class="achievement-box">
+                    <h3>{{page.projects_number_statistics}}+</h3>
+                    <p>Projects Completed</p>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="600">
+                  <div class="achievement-box">
+                    <h3>{{page.workers_number_statistics}}</h3>
+                    <p>Team Members</p>
+                  </div>
+                </div>
+              </div>
 
-          <div class="col-lg-7 about-img" data-aos="zoom-out" data-aos-delay="200"><img src="{{page.history_img.url}}"></div>
+              <div class="certifications mt-5" data-aos="fade-up" data-aos-delay="700">
+                <h5>Certifications &amp; Partnerships</h5>
 
-          <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
-            <h2 class="inner-title">{{page.h2}}</h2>
-            <div class="our-story">
-              <h4>Засновані у 1988</h4>
-              <h3>Наша історія</h3>
-              <p>{{page.history_text}}</p>
-              <ul>
-                <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commo</span></li>
-                <li><i class="bi bi-check-circle"></i> <span>Duis aute irure dolor in reprehenderit in</span></li>
-                <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea</span></li>
-              </ul>
+                <div class="row g-3 align-items-center">
+                {% for img in certificates_img %}
+                  <div class="col-4 col-md-3">
+                    <img src="{{img.image.url}}" alt="{{img.alt_text}}" class="img-fluid">
+                  </div>
+                {% endfor %}
+                </div>
+              </div>
 
-              <div class="watch-video d-flex align-items-center position-relative">
-                <i class="bi bi-play-circle"></i>
-                <a href="{{page.history_video}}" class="glightbox stretched-link">Подивитись відео</a>
+              <div class="cta-container mt-5" data-aos="fade-up" data-aos-delay="800">
+                <a href="{{page.history_video}}" class="btn btn-primary">Learn More About Us on Video</a>
               </div>
             </div>
           </div>
 
+          <div class="col-lg-6">
+            <div class="about-image position-relative" data-aos="fade-left" data-aos-delay="200">
+              <img src="{{page.history_img_left.url}}" alt="{{page.alt_img_left}}" class="img-fluid main-image rounded">
+              <div class="image-overlay">
+                <img src="{{page.history_img_right.url}}" alt="{{page.alt_img_right}}" class="img-fluid rounded">
+              </div>
+              <div class="experience-badge" data-aos="zoom-in" data-aos-delay="500">
+                <span>{{page.years_number_statistics}}+</span>
+                <p>Years of Experience</p>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
 
     </section><!-- /About Section -->
 
-    <!-- Stats Counter Section -->
-    <section id="stats-counter" class="stats-counter section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>{{page.title_statistics}}</h2>
-        <p>{{page.subtitle_statistics}}</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item d-flex align-items-center w-100 h-100">
-              <i class="bi bi-emoji-smile color-blue flex-shrink-0"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="{{page.clients_number_statistics}}" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Наші клієнти</p>
-              </div>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item d-flex align-items-center w-100 h-100">
-              <i class="bi bi-journal-richtext color-orange flex-shrink-0"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="{{page.projects_number_statistics}}" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Проекти</p>
-              </div>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item d-flex align-items-center w-100 h-100">
-              <i class="bi bi-headset color-green flex-shrink-0"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="{{page.support_h_number_statistics}}" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Години підтримки</p>
-              </div>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item d-flex align-items-center w-100 h-100">
-              <i class="bi bi-people color-pink flex-shrink-0"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="{{page.workers_number_statistics}}" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Співробітники</p>
-              </div>
-            </div>
-          </div><!-- End Stats Item -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Stats Counter Section -->
-
-    <!-- Alt Services Section -->
-    <section id="alt-services" class="alt-services section">
-
-      <div class="container">
-
-        <div class="row justify-content-around gy-4">
-          <div class="features-image col-lg-6" data-aos="fade-up" data-aos-delay="100"><img src="{% static "assets/img/alt-services.jpg" %}" alt=""></div>
-
-          <div class="col-lg-5 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
-            <h3>Enim quis est voluptatibus aliquid consequatur fugiat</h3>
-            <p>Esse voluptas cumque vel exercitationem. Reiciendis est hic accusamus. Non ipsam et sed minima temporibus laudantium. Soluta voluptate sed facere corporis dolores excepturi</p>
-
-            <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="300">
-              <i class="bi bi-easel flex-shrink-0"></i>
-              <div>
-                <h4><a href="" class="stretched-link">Lorem Ipsum</a></h4>
-                <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-              </div>
-            </div><!-- End Icon Box -->
-
-            <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="400">
-              <i class="bi bi-patch-check flex-shrink-0"></i>
-              <div>
-                <h4><a href="" class="stretched-link">Nemo Enim</a></h4>
-                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-              </div>
-            </div><!-- End Icon Box -->
-
-            <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="500">
-              <i class="bi bi-brightness-high flex-shrink-0"></i>
-              <div>
-                <h4><a href="" class="stretched-link">Dine Pad</a></h4>
-                <p>Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit. Sunt aut deserunt minus aut eligendi omnis</p>
-              </div>
-            </div><!-- End Icon Box -->
-
-            <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="600">
-              <i class="bi bi-brightness-high flex-shrink-0"></i>
-              <div>
-                <h4><a href="" class="stretched-link">Tride clov</a></h4>
-                <p>Est voluptatem labore deleniti quis a delectus et. Saepe dolorem libero sit non aspernatur odit amet. Et eligendi</p>
-              </div>
-            </div><!-- End Icon Box -->
-
-          </div>
-        </div>
-
-      </div>
-
-    </section><!-- /Alt Services Section -->
-
-    <!-- Alt Services 2 Section -->
-    <section id="alt-services-2" class="alt-services-2 section">
-
-      <div class="container">
-
-        <div class="row justify-content-around gy-4">
-
-          <div class="col-lg-6 d-flex flex-column justify-content-center order-2 order-lg-1" data-aos="fade-up" data-aos-delay="100">
-            <h3>Enim quis est voluptatibus aliquid consequatur</h3>
-            <p>Esse voluptas cumque vel exercitationem. Reiciendis est hic accusamus. Non ipsam et sed minima temporibus laudantium. Soluta voluptate sed facere corporis dolores excepturi</p>
-
-            <div class="row">
-
-              <div class="col-lg-6 icon-box d-flex">
-                <i class="bi bi-easel flex-shrink-0"></i>
-                <div>
-                  <h4>Lorem Ipsum</h4>
-                  <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias </p>
-                </div>
-              </div><!-- End Icon Box -->
-
-              <div class="col-lg-6 icon-box d-flex">
-                <i class="bi bi-patch-check flex-shrink-0"></i>
-                <div>
-                  <h4>Nemo Enim</h4>
-                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiise</p>
-                </div>
-              </div><!-- End Icon Box -->
-
-              <div class="col-lg-6 icon-box d-flex">
-                <i class="bi bi-brightness-high flex-shrink-0"></i>
-                <div>
-                  <h4>Dine Pad</h4>
-                  <p>Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit</p>
-                </div>
-              </div><!-- End Icon Box -->
-
-              <div class="col-lg-6 icon-box d-flex">
-                <i class="bi bi-brightness-high flex-shrink-0"></i>
-                <div>
-                  <h4>Tride clov</h4>
-                  <p>Est voluptatem labore deleniti quis a delectus et. Saepe dolorem libero sit</p>
-                </div>
-              </div><!-- End Icon Box -->
-
-            </div>
-
-          </div>
-
-          <div class="features-image col-lg-5 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="200">
-            <img src="{% static "assets/img/features-3-2.jpg" %}" alt="">
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- /Alt Services 2 Section -->
-
-    <section id="team" class="team section">
-
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Наша команда</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div>
-
-      <div class="container">
-        <div class="row gy-5">
-          {% for person in team %}
-          <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="100">
-            <div class="member-img">
-              <img src="{{person.team_img.url}}" class="img-fluid" alt="">
-              <div class="social">
-                {% if person.twitter %}<a href="{{person.twitter}}"><i class="bi bi-twitter-x"></i></a>{% endif %}
-                {% if person.facebook %}<a href="{{person.facebook}}"><i class="bi bi-facebook"></i></a>{% endif %}
-                {% if person.instagram %}<a href="{{person.instagram}}"><i class="bi bi-instagram"></i></a>{% endif %}
-                {% if person.linkedin %}<a href="{{person.linkedin}}"><i class="bi bi-linkedin"></i></a>{% endif %}
-              </div>
-            </div>
-            <div class="member-info text-center">
-              <h4>{{person.team_name}}</h4>
-              <span>{{person.team_position}}</span>
-              <p>{{person.team_description}}</p>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Testimonials</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="swiper init-swiper">
-          <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "320": {
-                  "slidesPerView": 1,
-                  "spaceBetween": 40
-                },
-                "1200": {
-                  "slidesPerView": 2,
-                  "spaceBetween": 20
-                }
-              }
-            }
-          </script>
-          <div class="swiper-wrapper">
-            {% for item in testimonials %}
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                  <img src="{{item.testimonials_img.url}}" class="testimonial-img" alt="Відгук від {{item.testimonials_name}} - {{item.testimonials_position}}">
-                  <h3>{{item.testimonials_name}}</h3>
-                  <h4>{{item.testimonials_position}}</h4>
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    <span>{{item.testimonials_message}}</span>
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-            {% endfor %}
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-
-    </section><!-- /Testimonials Section -->
 
 {% endblock content %}

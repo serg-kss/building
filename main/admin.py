@@ -1,12 +1,8 @@
 from main.admin_mixins import SingletonAdmin
-from .models import AboutPage, ContactsData, HomePage, HomeSlider, SocialMedia, ContactMessages, TeamAboutPage, TestimonialsAboutPage
+from .models import AboutPage, ContactsData, Gallery, HomePage, HomePageCertifCreator, Privacy, SocialMedia, ContactMessages, TeamAboutPage, Terms, TestimonialsAboutPage, AboutImage
 from django.utils.html import format_html
-
 from adminsortable2.admin import SortableInlineAdminMixin, SortableAdminBase
-
-from django.contrib import admin, messages
-from django.shortcuts import redirect
-from django.urls import reverse
+from django.contrib import admin
 
 
 @admin.register(ContactsData)
@@ -16,12 +12,14 @@ class ContactsDataAdmin(SingletonAdmin):
             "all": ("assets/css/admin.css",)
         }
 
+
 @admin.register(SocialMedia)
 class SocialMediaAdmin(SingletonAdmin):
     class Media:
         css = {
             "all": ("assets/css/admin.css",)
         }
+
 
 @admin.register(ContactMessages)
 class ContactMessagesAdmin(admin.ModelAdmin):
@@ -52,45 +50,126 @@ class ContactMessagesAdmin(admin.ModelAdmin):
         return False
 
 
-class HomeSliderInline(SortableInlineAdminMixin, admin.StackedInline):
+class HomePageCertifCreatorInline(SortableInlineAdminMixin, admin.StackedInline):
+    model = HomePageCertifCreator
+    extra = 0
+    readonly_fields = (
+        "preview",
+    )
 
     class Media:
         css = {
             "all": ("assets/css/admin.css",)
         }
-    model = HomeSlider
-    extra = 0
-    ordering = ("order",)
-
-    readonly_fields = (
-        "preview_desktop",
-        "preview_mobile",
+    fieldsets = (
+        ("- Зображення сертифікатів або нагород ", {
+            "fields": (
+                "title",
+                "sub_title",
+                "text",
+                "img",
+                "preview",
+                "alt_img",
+            )
+        }),
     )
 
+    def preview(self, obj):
+        if obj.img:
+            return format_html(
+                '<img src="{}" style="height:90px;border-radius:6px;" />',
+                obj.img.url
+            )
+        return "—"
+
+
+@admin.register(HomePage)
+class HomePageAdmin(SortableAdminBase, SingletonAdmin):
+
+    class Media:
+        js = ("assets/js/admin.js",)
+        css = {
+            "all": ("assets/css/admin.css",)
+        }
+    inlines = [HomePageCertifCreatorInline]
     fieldsets = (
-        ("- Відображення для ноутбука", {
+        ("Блок: Вступ", {
+            "fields": (
+                "h1", 
+                "hero_text",
+                "hero_years_experience",
+                "hero_projects_completed",
+                "hero_satisfied_clients",
+                "hero_img",
+                "hero_img_alt",
+                "hero_video"
+                )
+        }),
+        ("Блок: Послуги", {
+            "fields": (
+                "sub_title_services",
+                "sub_text_services",
+            )
+        }),
+        ("Блок: Проекти", {
+            "fields": (
+                "sub_title_portfolio",
+                "sub_text_portfolio",
+            )
+        }),
+        ("Блок: Сертифікати", {
+            "fields": (
+                "sub_title_certif",
+                "sub_text_certif",
+                "title_certif",
+                "text_certif",
+                "img_certif",
+                "img_certif_alt",
+                "title_certif_img",
+                'text_certif_img',
+                "awards_certif",
+            )
+        }),
+        ("Блок: Команда", {
+            "fields": (
+                "sub_title_team",
+                "sub_text_team",
+            )
+        }),
+        ("Блок: Підтримка клієнтів", {
+            "fields": (
+                "title_quote",
+                "text_quote",
+                "option_1",
+                "option_2",
+                "option_3",
+            )
+        }),
+    )
+
+
+class AboutImageInline(SortableInlineAdminMixin, admin.StackedInline):
+    model = AboutImage
+    extra = 0
+    readonly_fields = (
+        "preview",
+    )
+
+    class Media:
+        css = {
+            "all": ("assets/css/admin.css",)
+        }
+    fieldsets = (
+        ("- Зображення сертифікатів або нагород ", {
             "fields": (
                 "image",
-                "preview_desktop",
-            )
-        }),
-
-        ("- Відображення для смартфону", {
-            "fields": (
-                "image_mobile",
-                "preview_mobile",
-            )
-        }),
-
-        ("- Інфо", {
-            "fields": (
-                "alt",
-                "order",
+                "preview",
+                "alt_text",
             )
         }),
     )
 
-    def preview_desktop(self, obj):
+    def preview(self, obj):
         if obj.image:
             return format_html(
                 '<img src="{}" style="height:90px;border-radius:6px;" />',
@@ -98,62 +177,13 @@ class HomeSliderInline(SortableInlineAdminMixin, admin.StackedInline):
             )
         return "—"
 
-    preview_desktop.short_description = "Попередній перегляд"
-
-    def preview_mobile(self, obj):
-        if obj.image_mobile:
-            return format_html(
-                '<img src="{}" style="height:90px;border-radius:6px;" />',
-                obj.image_mobile.url
-            )
-        return "—"
-
-    preview_mobile.short_description = "Попередній перегляд (смарт)"
-
-
-@admin.register(HomePage)
-class HomePageAdmin(SortableAdminBase, SingletonAdmin):
-
-    inlines = [HomeSliderInline]
-
-    class Media:
-        js = ("assets/js/admin.js",)
-        css = {
-            "all": ("assets/css/admin.css",)
-        }
-
-    def changelist_view(self, request, extra_context=None):
-
-        obj = HomePage.objects.first()
-
-        if obj:
-            return redirect(
-                reverse(
-                    "admin:main_homepage_change",
-                    args=[obj.id]
-                )
-            )
-
-        return super().changelist_view(request, extra_context)
-
-    def response_change(self, request, obj):
-
-        if "_save" in request.POST:
-
-            self.message_user(
-                request,
-                "Головна сторінка успішно збережена ✅",
-                level=messages.SUCCESS
-            )
-
-            return redirect(reverse("admin:index"))
-
-        return super().response_change(request, obj)
 
 class TeamAboutInline(SortableInlineAdminMixin, admin.StackedInline):
     model = TeamAboutPage
     extra = 0
     ordering = ("order",)
+    verbose_name = "Учасник команди"
+    verbose_name_plural = "Учасники команди"
 
     readonly_fields = (
         "preview",
@@ -170,10 +200,11 @@ class TeamAboutInline(SortableInlineAdminMixin, admin.StackedInline):
 
         ("- Соц мережі", {
             "fields": (
-                "twitter",
-                "facebook",
-                "instagram",
+                "email",
+                "phone",
                 "linkedin",
+                "option_1",
+                "option_2",
             )
         }),
 
@@ -181,7 +212,6 @@ class TeamAboutInline(SortableInlineAdminMixin, admin.StackedInline):
             "fields": (
                 "team_img",
                 "preview",
-                "order",
             )
         }),
     )
@@ -193,6 +223,7 @@ class TeamAboutInline(SortableInlineAdminMixin, admin.StackedInline):
                 obj.team_img.url
             )
         return "—"
+    
 
 class TestimonialAboutInline(SortableInlineAdminMixin, admin.StackedInline):
     model = TestimonialsAboutPage
@@ -208,6 +239,7 @@ class TestimonialAboutInline(SortableInlineAdminMixin, admin.StackedInline):
             "fields": (
                 "testimonials_name",
                 "testimonials_position",
+                "testimonials_company",
                 "testimonials_message",
             )
         }),
@@ -229,6 +261,7 @@ class TestimonialAboutInline(SortableInlineAdminMixin, admin.StackedInline):
             )
         return "—"
 
+
 @admin.register(AboutPage)
 class AboutPageAdmin(SortableAdminBase, SingletonAdmin):
 
@@ -237,35 +270,35 @@ class AboutPageAdmin(SortableAdminBase, SingletonAdmin):
             "all": ("assets/css/admin.css",)
         }
 
-    inlines = [TeamAboutInline, TestimonialAboutInline]
+    inlines = [AboutImageInline, TeamAboutInline, TestimonialAboutInline]
 
     fieldsets = (
         ("Сторінка про компанію", {
-            "fields": ("h1",)
+            "fields": ("h1_about", "h1_team")
         }),
 
         ("Блок історії", {
             "fields": (
                 "h2",
                 "history_text",
-                "history_img",
+                "history_img_left",
+                "alt_img_left",
+                "history_img_right",
+                "alt_img_right",
                 "image_preview",
                 "history_video",
             )
         }),
         ("Блок статистики", {
             "fields": (
-                "title_statistics",
-                "subtitle_statistics",
                 (
-                    "clients_number_statistics",
+                    "years_number_statistics",
                     "projects_number_statistics",
                 ),
                 (
-                    "support_h_number_statistics",
+
                     "workers_number_statistics",
                 ),
-                "statistics_img",
             )
         }),
     )
@@ -273,19 +306,80 @@ class AboutPageAdmin(SortableAdminBase, SingletonAdmin):
     readonly_fields = ("image_preview",)
 
     def image_preview(self, obj):
-        if obj.history_img:
+        images_html = []
+
+        # основные изображения
+        if obj.history_img_left:
+            images_html.append(
+                format_html(
+                    '<img src="{}" style="height:120px;border-radius:6px;margin:5px;">',
+                    obj.history_img_left.url
+                )
+            )
+
+        if obj.history_img_right:
+            images_html.append(
+                format_html(
+                    '<img src="{}" style="height:120px;border-radius:6px;margin:5px;">',
+                    obj.history_img_right.url
+                )
+            )
+
+        if not images_html:
+            return "—"
+
+        return format_html(
+            '<div style="display:flex;flex-wrap:wrap;">{}</div>',
+            format_html("".join(images_html))
+        )
+
+    image_preview.short_description = "Попередній перегляд"
+
+
+@admin.register(Terms)
+class TermsAdmin(SingletonAdmin):
+    class Media:
+        css = {
+            "all": ("assets/css/admin.css",)
+        }
+
+
+@admin.register(Privacy)
+class PrivacyAdmin(SingletonAdmin):
+    class Media:
+        css = {
+            "all": ("assets/css/admin.css",)
+        }
+
+
+@admin.register(Gallery)
+class GalleryAdmin(admin.ModelAdmin):
+    class Media:
+        css = {
+            "all": ("assets/css/admin.css",)
+        }
+    readonly_fields = ("preview",)
+
+    list_display = (
+        "preview",
+    )
+    
+    fieldsets = (
+        ("Сторінка про компанію", {
+            "fields": (
+                "title",
+                "text",
+                "img", 
+                "alt_img",
+            )
+        }),
+    )
+    def preview(self, obj):
+        if obj.img:
             return format_html(
-                '<img src="{}" style="max-height:200px;border-radius:6px;">',
-                obj.history_img.url
+                '<img src="{}" style="height:90px;border-radius:6px;" />',
+                obj.img.url
             )
         return "—"
     
-    def image_preview(self, obj):
-        if obj.statistics_img:
-            return format_html(
-                '<img src="{}" style="max-height:200px;border-radius:6px;">',
-                obj.statistics_img.url
-            )
-        return "—"
-
-    image_preview.short_description = "Попередній перегляд"
+    preview.short_description = "Попередній перегляд"

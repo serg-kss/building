@@ -40,11 +40,11 @@ INSTALLED_APPS = [
 
     'seo',
     'main.apps.MainConfig',
-    'blog',
     'services',
     'portfolio',
 
     "tinymce",
+    "cookie_consent",
 ]
 
 MIDDLEWARE = [
@@ -73,6 +73,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
 
                 "main.context_processors.site_settings",
+                "django.template.context_processors.request"
             ],
         },
     },
@@ -163,22 +164,28 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 JAZZMIN_SETTINGS = {
 
-    "site_title": "Building Admin",
+    "site_title": "БІЛДІНГ ЕСТЕЙТ Admin",
     "site_header": "Building CMS",
-    "site_brand": "Building",
+    "site_brand": "БІЛДІНГ ЕСТЕЙТ",
+    "custom_css": "assets/css/admin.css",
 
     "welcome_sign": "Керування сайтом",
 
     "site_logo": None,
     "login_logo": None,
+    "site_icon": "assets/img/favicons/favicon-32x32.png",
+    "login_logo": "assets/img/logo-admin.png",
+
 
     "show_sidebar": True,
+    "show_ui_builder": False,
     "navigation_expanded": True,
 
     "hide_apps": [],
     "hide_models": [],
 
     "order_with_respect_to": [
+        
         "main",
         "services",
         "portfolio",
@@ -213,6 +220,11 @@ JAZZMIN_SETTINGS = {
     "usermenu_links": [
         {"name": "Перейти на сайт", "url": "/", "new_window": True},
     ],
+
+    "hide_apps": [
+        "auth",
+    ],
+    
 
 }
 
@@ -281,10 +293,17 @@ TINYMCE_DEFAULT_CONFIG = {
 
     "content_style": """
         body {
-            background: #2B3035;
-            color: #e9ecef;
-            font-family: Arial, sans-serif;
-            font-size:14px
+            background-color: #212529;
+            color: #f8f9fa;
+            font-size: 16px;
+        }
+
+        p, h1, h2, h3, h4, h5, h6 {
+            color: #f8f9fa;
+        }
+
+        a {
+            color: #4dabf7;
         }
     """,
 }

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+  {% include "includes/header.html" %}
+{% endblock header %}
+
+{% block content %}
+
+    {% include "main/includes/page_title.html" %}
+
+    <!-- Team Section -->
+    <section id="team" class="team section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          {% for person in team %}
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="team-card compact">
+              <div class="member-photo">
+                <img src="{{person.team_img.url}}" class="img-fluid" alt="{{person.team_name}}| {{person.team_position}}">
+                <div class="hover-overlay">
+                  <div class="overlay-content">
+                    <h5>{{person.team_name}}</h5>
+                    <span>{{person.team_position}}</span>
+                    <div class="quick-contact">
+                      <a href="mailto:{{person.email}}"><i class="bi bi-envelope"></i></a>
+                      <a href="phone:{{person.phone}}"><i class="bi bi-telephone"></i></a>
+                      <a href="{{person.linkedin}}"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="member-summary">
+                <h5>{{person.team_name}}</h5>
+                <span>{{person.team_position}}</span>
+                <div class="skills">
+                  <span class="skill-tag">{{person.option_1}}</span>
+                  <span class="skill-tag">{{person.option_2}}</span>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Compact Team Member -->         
+          
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+    </section><!-- /Team Section -->
+
+
+{% endblock content %}

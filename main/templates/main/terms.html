@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+  {% include "includes/header.html" %}
+{% endblock header %}
+
+{% block content %}
+
+    {% include "main/includes/page_title.html" %}
+
+    <!-- Terms Of Service Section -->
+    <section id="terms-of-service" class="terms-of-service section">
+
+      <div class="container" data-aos="fade-up">
+        <!-- Page Header -->
+        <div class="tos-header text-center" data-aos="fade-up">
+          <span class="last-updated">Останнє оновлення: 27 лютого 2025 року</span>
+          <h2>Умови обслуговування</h2>
+          <p>Будь ласка, уважно прочитайте ці умови надання послуг, перш ніж користуватися нашими послугами</p>
+        </div>
+
+        <!-- Content -->
+        <div class="tos-content" data-aos="fade-up" data-aos-delay="200">
+          <!-- Agreement Section -->
+          {{page.content|safe}}
+
+          <div class="content-section">
+            <div class="notice-box">
+              <i class="bi bi-bell"></i>
+              <p>Продовжуючи доступ до нашого сервісу або його використання після набрання чинності цими змінами, ви погоджуєтеся з переглянутими умовами.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="tos-contact" data-aos="fade-up" data-aos-delay="300">
+          <div class="contact-box">
+            <div class="contact-icon">
+              <i class="bi bi-envelope"></i>
+            </div>
+            <div class="contact-content">
+              <h4>Запитання щодо умов?!</h4>
+              <p>Якщо у вас є будь-які питання щодо цих Умов, будь ласка, зв’яжіться з нами.</p>
+              <a href="{% url "main:contact" %}" class="contact-link">Зверніться до служби підтримки</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- /Terms Of Service Section -->
+
+{% endblock content %}

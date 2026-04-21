@@ -1,45 +1,55 @@
 {% load static %}
 {% load i18n %}
 
+  <header id="header" class="header sticky-top dark-background">
 
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+    <div class="topbar d-flex align-items-center dark-background">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:{{ site_email }}">{{ site_email }}</a></i>
+          <i class="bi bi-phone d-flex align-items-center ms-4"><span>{{ site_phone }}</span></i>
+        </div>
+        <div class="social-links d-none d-md-flex align-items-center">
+          {% if site_twitter != '' %}<a href="{{site_twitter| default:"#"}}" class="twitter"><i class="bi bi-twitter-x"></i></a>{% endif %}
+          {% if site_facebook != '' %}<a href="{{site_facebook| default:"#"}}" class="facebook"><i class="bi bi-facebook"></i></a>{% endif %}
+          {% if site_instagram != '' %}<a href="{{site_instagram| default:"#"}}" class="instagram"><i class="bi bi-instagram"></i></a>{% endif %}
+          {% if site_linkedin != '' %}<a href="{{site_linkedin| default:"#"}}" class="linkedin"><i class="bi bi-linkedin"></i></a>{% endif %}
+        </div>
+      </div>
+    </div><!-- End Top Bar -->
 
-      <a href="{% url "main:index" %}" class="logo d-flex align-items-center">
-        <!--<img src="assets/img/logo.png" alt="">-->
-        <h1 class="sitename">UpConstruction</h1> <span>.</span>
-      </a>
+    <div class="branding d-flex align-items-cente">
+
+      <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="{% url "main:index" %}" class="logo d-flex align-items-center">
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+           <img src="{% static "assets/img/logo-part.jpg" %}" alt=""> 
+          <!--<h1 class="sitename">БІЛДІНГ ЕСТЕЙТ</h1>-->
+        </a>
       {% with current_url=request.resolver_match.url_name %}
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="{% url "main:index" %}" class="{% if current_url == 'index' %}active{% endif %}">Home</a></li>
-          <li><a href="{% url "main:about" %}" class="{% if current_url == 'about' %}active{% endif %}">About</a></li>
-          <li><a href="{% url "services:services" %}" class="{% if current_url == 'services' %}active{% endif %}">Services</a></li>
-          <li><a href="{% url "portfolio:portfolio" %}" class="{% if current_url == 'portfolio' %}active{% endif %}">Projects</a></li>
-          <li><a href="{% url "blog:blog" %}" class="{% if current_url == 'blog' %}active{% endif %}">Blog</a></li>
-          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
-            </ul>
-          </li>
-          <li><a href="{% url "main:contact" %}" class="{% if current_url == 'contact' %}active{% endif %}">Contact</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="{% url "main:index" %}" class="{% if current_url == 'index' %}active{% endif %}">Головна</a></li>
+            <li><a href="{% url "main:about" %}" class="{% if current_url == 'about' %}active{% endif %}">Про компанію</a></li>
+            <li><a href="{% url "services:services" %}" class="{% if current_url == 'services' %}active{% endif %}">Послуги</a></li>
+            <li><a href="{% url "portfolio:portfolio" %}" class="{% if current_url == 'portfolio' %}active{% endif %}">Проекти</a></li>
+            <li><a href="{% url "main:team" %}" class="{% if current_url == 'team' %}active{% endif %}">Команда</a></li>
+            <li class="dropdown"><a href="#"><span>More Pages</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="service-details.html">Service Details</a></li>
+                <li><a href="{% url "main:gallery" %}">Gallety</a></li>
+                <li><a href="{% url "main:quote" %}">Quote Form</a></li>
+                <li><a href="{% url "main:terms" %}">Terms</a></li>
+                <li><a href="{% url "main:privacy" %}">Privacy</a></li>
+              </ul>
+            </li>
+            <li><a href="{% url "main:contact" %}" class="{% if current_url == 'contact' %}active{% endif %}">Контакти</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
       {% endwith %}
-
+      </div>
 
     </div>
+
   </header>

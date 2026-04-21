@@ -1,0 +1,209 @@
+// main: ../main.scss
+/*--------------------------------------------------------------
+# About Section
+--------------------------------------------------------------*/
+.about {
+  position: relative;
+
+  .about-content {
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      position: relative;
+
+      &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -0.5rem;
+        width: 80px;
+        height: 4px;
+        background-color: var(--accent-color);
+      }
+    }
+
+    .lead {
+      font-size: 1.15rem;
+      margin-bottom: 1.5rem;
+      color: color-mix(in srgb, var(--heading-color), transparent 10%);
+    }
+
+    p {
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+  }
+
+  .achievement-boxes {
+    .achievement-box {
+      background-color: var(--surface-color);
+      border-left: 4px solid var(--accent-color);
+      padding: 1.2rem;
+      height: 100%;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      h3 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+        color: var(--accent-color);
+      }
+
+      p {
+        margin-bottom: 0;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .certifications {
+    h5 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    img {
+      transition: transform 0.3s ease;
+      filter: grayscale(100%);
+      opacity: 0.7;
+
+      &:hover {
+        filter: grayscale(0);
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .cta-container {
+    .btn-primary {
+      background-color: var(--accent-color);
+      border-color: var(--accent-color);
+      color: var(--contrast-color);
+      padding: 0.75rem 1.5rem;
+      font-weight: 500;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--accent-color), #000 10%);
+        border-color: color-mix(in srgb, var(--accent-color), #000 10%);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px color-mix(in srgb, var(--accent-color), transparent 70%);
+      }
+    }
+  }
+
+  .about-image {
+    position: relative;
+
+    .main-image {
+      border-radius: 8px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+    }
+
+    .image-overlay {
+      position: absolute;
+      bottom: -60px;
+      right: -30px;
+      width: 50%;
+      z-index: 2;
+      border-radius: 8px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+
+      img {
+        border: 5px solid var(--background-color);
+      }
+    }
+
+    .experience-badge {
+      position: absolute;
+      top: 30px;
+      left: -30px;
+      background-color: var(--accent-color);
+      color: var(--contrast-color);
+      padding: 1.5rem;
+      border-radius: 50%;
+      width: 130px;
+      height: 130px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 10px 25px color-mix(in srgb, var(--accent-color), transparent 60%);
+
+      span {
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      p {
+        font-size: 0.8rem;
+        margin-bottom: 0;
+        margin-top: 0.3rem;
+      }
+    }
+  }
+
+  @media (max-width: 991.98px) {
+    .about-image {
+      margin-top: 3rem;
+
+      .image-overlay {
+        bottom: -40px;
+        right: -20px;
+      }
+
+      .experience-badge {
+        width: 100px;
+        height: 100px;
+        padding: 1rem;
+        left: -20px;
+
+        span {
+          font-size: 1.5rem;
+        }
+
+        p {
+          font-size: 0.7rem;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .achievement-boxes {
+      .achievement-box {
+        padding: 1rem;
+
+        h3 {
+          font-size: 1.8rem;
+        }
+
+        p {
+          font-size: 0.8rem;
+        }
+      }
+    }
+
+    .about-image {
+      .image-overlay {
+        bottom: -30px;
+        right: 0;
+        width: 40%;
+      }
+    }
+  }
+}

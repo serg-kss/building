@@ -1,4 +1,13 @@
 {% load static %}
+{% load cookie_consent_tags %}
+{% if request|cookie_group_accepted:"analytics" %}
+  {# load 3rd party analytics #}
+{% endif %}
+
+{% if request|cookie_group_accepted:"analytics=_ga:example.com" %}
+  {# load google analytics #}
+{% endif %}
+
 
 <!DOCTYPE html>
 <html lang="uk">
@@ -7,9 +16,15 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   {% include "seo/includes/seo.html" %}
+
   <!-- Favicons -->
-  <link href="{% static "assets/img/favicon.png" %}" rel="icon">
-  <link href="{% static "assets/img/apple-touch-icon.png" %}" rel="apple-touch-icon">
+  <link rel="icon" type="image/png" sizes="16x16"  href="{% static "assets/img/favicons/favicon-16x16.png" %}">
+  <link rel="icon" type="image/png" sizes="32x32"  href="{% static "assets/img/favicons/favicon-32x32.png" %}">
+  <link rel="icon" type="image/png" sizes="96x96"  href="{% static "assets/img/favicons/apple-touch-icon-96x96.png" %}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/img/favicons/apple-touch-icon-180x180.png" %}">
+  <link rel="icon" type="image/png" sizes="192x192"  href="{% static "assets/img/favicons/android-icon-192x192.png" %}">
+  <meta name="msapplication-TileColor" content="#0E1422">
+  <meta name="theme-color" content="#0E1422">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -61,6 +76,61 @@
 
   <script src="{% static "assets/js/main.js" %}"></script>
 
+
+{% url "cookie_consent_cookie_group_list" as url_cookies %}
+
+<template id="cookie-consent__cookie-bar">
+
+<div class="cookie-bar">
+
+<div class="cookie-bar__container">
+
+<div class="cookie-bar__text">
+
+Цей сайт використовує cookies для кращої роботи.
+
+</div>
+
+<div class="cookie-bar__actions">
+
+<button type="button"
+        class="cookie-consent__accept btn btn-primary btn-sm">
+Прийняти
+</button>
+
+<button type="button"
+        class="cookie-consent__decline btn btn-outline-light btn-sm">
+Відхилити
+</button>
+
+<a href="{{ url_cookies }}"
+   class="cookie-bar__link">
+Детальніше
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</template>
+{% load cookie_consent_tags %}
+
+{% all_cookie_groups 'cookie-consent__cookie-groups' %}
+{% load static cookie_consent_tags %}
+{% static "cookie_consent/cookiebar.module.js" as cookiebar_src %}
+{% url 'cookie_consent_status' as status_url %}
+
+<script type="module">
+import { showCookieBar } from '{{ cookiebar_src }}';
+
+showCookieBar({
+  statusUrl: '{{ status_url|escapejs }}',
+  templateSelector: '#cookie-consent__cookie-bar',
+  cookieGroupsSelector: '#cookie-consent__cookie-groups',
+});
+</script>
 </body>
 
 </html>

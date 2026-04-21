@@ -12,47 +12,116 @@
     <!-- Service Details Section -->
     <section id="service-details" class="service-details section">
 
-      <div class="container">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="row gy-4">
+        <div class="row">
+          <div class="col-lg-4 order-lg-2">
+            <div class="service-sidebar" data-aos="fade-left" data-aos-delay="200">
 
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="services-list">
-              <a href="#" class="active">Web Design</a>
-              <a href="#">Software Development</a>
-              <a href="#">Product Management</a>
-              <a href="#">Graphic Design</a>
-              <a href="#">Marketing</a>
-            </div>
+              <div class="service-overview-card">
+                <div class="service-icon">
+                  <i class="bi bi-building"></i>
+                </div>
+                <h3>{{service.title}}</h3>
+                <p>{{service.text}}</p>
+              </div>
 
-            <h4>Enim qui eos rerum in delectus</h4>
-            <p>Nam voluptatem quasi numquam quas fugiat ex temporibus quo est. Quia aut quam quod facere ut non occaecati ut aut. Nesciunt mollitia illum tempore corrupti sed eum reiciendis. Maxime modi rerum.</p>
+              <div class="quick-info-card">
+                <h4>Інформація про проект</h4>
+                <div class="info-grid">
+                  {% for item in service.data.all %}
+                  <div class="info-row">
+                    <span class="label">{{item.key}}</span>
+                    <span class="value">{{item.feture}}</span>
+                  </div>                  
+                  {% endfor %}
+                </div>
+              </div>
+
+              <div class="contact-action-card">
+                <h4>Ready to Start?</h4>
+                <p class="contact-text">Mauris blandit aliquet elit eget tincidunt nibh pulvinar a proin gravida hendrerit.</p>
+                <div class="contact-methods">
+                  <a href="tel:{{site_phone}}" class="contact-btn">
+                    <i class="bi bi-telephone-fill"></i>
+                    <span>Call Now</span>
+                  </a>
+                  <a href="mailto:{{site_email}}" class="contact-btn">
+                    <i class="bi bi-envelope-fill"></i>
+                    <span>Email Us</span>
+                  </a>
+                </div>
+              </div>
+
+            </div><!-- End Service Sidebar -->
           </div>
 
-          <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-            <img src="{% static "assets/img/services.jpg" %}" alt="" class="img-fluid services-img">
-            <h3>Temporibus et in vero dicta aut eius lidero plastis trand lined voluptas dolorem ut voluptas</h3>
-            <p>
-              {{service.content|safe}}
-            </p>
-            <ul>
-              <li><i class="bi bi-check-circle"></i> <span>Aut eum totam accusantium voluptatem.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Assumenda et porro nisi nihil nesciunt voluptatibus.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea</span></li>
-            </ul>
-            <p>
-              Est reprehenderit voluptatem necessitatibus asperiores neque sed ea illo. Deleniti quam sequi optio iste veniam repellat odit. Aut pariatur itaque nesciunt fuga.
-            </p>
-            <p>
-              Sunt rem odit accusantium omnis perspiciatis officia. Laboriosam aut consequuntur recusandae mollitia doloremque est architecto cupiditate ullam. Quia est ut occaecati fuga. Distinctio ex repellendus eveniet velit sint quia sapiente cumque. Et ipsa perferendis ut nihil. Laboriosam vel voluptates tenetur nostrum. Eaque iusto cupiditate et totam et quia dolorum in. Sunt molestiae ipsum at consequatur vero. Architecto ut pariatur autem ad non cumque nesciunt qui maxime. Sunt eum quia impedit dolore alias explicabo ea.
-            </p>
-          </div>
+          <div class="col-lg-8 order-lg-1">
+            <div class="service-main-content">
 
+              <div class="hero-section" data-aos="zoom-in" data-aos-delay="150">
+                <img src="{{service.img_main.url}}" alt="{{service.img_main_alt}}" class="img-fluid">
+                <div class="hero-overlay">
+                  <div class="hero-badge">
+                    <i class="bi bi-award"></i>
+                    <span>Licensed &amp; Insured</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="content-section" data-aos="fade-up" data-aos-delay="200">
+                <div class="content-intro">
+                  {{service.content|safe}}
+                </div>
+              </div>
+
+              <div class="capabilities-grid" data-aos="fade-up" data-aos-delay="250">
+                <h2>Наші можливості</h2>
+                <div class="row g-4">
+                  {% for item in service.сapabilities.all %}
+                  <div class="col-md-6">
+                    <div class="capability-card">
+                      <div class="capability-icon">
+                        <i class="bi bi-building-gear"></i>
+                      </div>
+                      <h4>{{item.title}}</h4>
+                      <p>{{item.text}}</p>
+                    </div>
+                  </div>                  
+                  {% endfor %}
+
+                </div>
+              </div>
+
+              <div class="methodology-section" data-aos="fade-up" data-aos-delay="300">
+                <h2>Наша методологія</h2>
+                <div class="methodology-timeline">
+                  {% for item in service.methodology.all %}
+                  <div class="timeline-item">
+                    <div class="timeline-marker">
+                      <span class="phase-number">{{ forloop.counter }}</span>
+                    </div>
+                    <div class="timeline-content">
+                      <h4>{{item.title}}</h4>
+                      <p>{{item.text}}</p>
+                      <ul class="phase-features">
+                        <li>{{item.option_1}}</li>
+                        <li>{{item.option_2}}</li>
+                        <li>{{item.option_3}}</li>
+                      </ul>
+                    </div>
+                  </div>                  
+                  {% endfor %}
+
+
+                </div>
+              </div>
+
+            </div><!-- End Service Main Content -->
+          </div>
         </div>
 
       </div>
 
     </section><!-- /Service Details Section -->
-
-
 {% endblock content %}

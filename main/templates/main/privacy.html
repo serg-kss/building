@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+  {% include "includes/header.html" %}
+{% endblock header %}
+
+{% block content %}
+
+    {% include "main/includes/page_title.html" %}
+
+    <!-- Privacy Section -->
+    <section id="privacy" class="privacy section">
+
+      <div class="container" data-aos="fade-up">
+        <!-- Header -->
+        <div class="privacy-header" data-aos="fade-up">
+          <div class="header-content">
+            <div class="last-updated">Дата набрання чинності: 27 лютого 2025 року</div>
+            <h1>Політика конфіденційності</h1>
+            <p class="intro-text">Ця Політика конфіденційності описує, як ми збираємо, використовуємо, обробляємо та розкриваємо вашу інформацію, включаючи персональні дані, у зв'язку з вашим доступом до наших послуг та їх використанням.</p>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="privacy-content" data-aos="fade-up">
+          <!-- Introduction -->
+          {{page.content|safe}}
+        </div>
+
+      </div>
+
+    </section><!-- /Privacy Section -->
+
+{% endblock content %}
