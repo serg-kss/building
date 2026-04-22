@@ -3,6 +3,9 @@ from tinymce.models import HTMLField
 from django.utils.text import slugify
 from main.utils.image import compress_image
 from tinymce.models import HTMLField
+from django.urls import reverse
+
+from seo.models import PageSEO
 
 
 class ServicePage(models.Model):
@@ -59,6 +62,13 @@ class ServicePageExtraServices(models.Model):
 class Service(models.Model):
     name = models.CharField("Назва Сервісу", max_length=100)
     slug = models.SlugField(unique=True, blank=False)
+    seo = models.OneToOneField(
+        PageSEO,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="service"
+    )
     sub_text = models.TextField("Доп текст", max_length=500, blank=True, default="")
     option_1 = models.CharField("Доп інфо 1", max_length=100)
     option_2 = models.CharField("Доп інфо 2", max_length=100)
@@ -82,6 +92,13 @@ class Service(models.Model):
         super().save(*args, **kwargs)
         if self.img_main:
             compress_image(self.img_main.path, (1920, 900))
+    
+    def get_absolute_url(self):
+
+        return reverse(
+            "services:service",
+            kwargs={"slug": self.slug}
+        )
 
     class Meta:
         verbose_name = "Сервіс"

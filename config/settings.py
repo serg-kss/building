@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    'seo',
+    'seo.apps.SeoConfig',
     'main.apps.MainConfig',
     'services',
     'portfolio',
@@ -73,7 +73,8 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
 
                 "main.context_processors.site_settings",
-                "django.template.context_processors.request"
+                "seo.context_processors.seo",
+                "seo.context_processors.organization_schema",
             ],
         },
     },

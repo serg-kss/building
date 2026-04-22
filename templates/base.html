@@ -58,12 +58,7 @@
   <div id="preloader"></div>
 
   <script type="application/ld+json">
-    {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Your Company",
-    "url": "{{ request.build_absolute_uri }}"
-    }
+    {{ organization_schema|safe }}
   </script>
 
   <script src="{% static "assets/vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>

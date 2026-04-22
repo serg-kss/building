@@ -2,6 +2,8 @@ from django.views.generic import ListView, DetailView, View
 from portfolio.models import Portfolio, PortfolioPage, TechnicalDetails
 from django.shortcuts import render
 
+from seo.models import PageSEO
+
 
 class PortfolioView(View):
 
@@ -31,8 +33,13 @@ class PortfolioDetailView(DetailView):
     def get_context_data(self, **kwargs):
 
         context = super().get_context_data(**kwargs)
+        portfolio = self.object
         context["title_h1"] = self.object.name
         context["breadcrumbs"] = "Портфоліо"
+        context["seo"] = (
+            portfolio.seo
+            or PageSEO.objects.filter(page="portfolio").first()
+        )
         return context
 
 

@@ -2,38 +2,52 @@ from django.shortcuts import render
 from django.views import View
 from django.http import JsonResponse
 from django.core.paginator import Paginator
-from main.models import AboutPage, ContactMessages, HomePage, Terms as T, Privacy as P, Gallery as G
+
+from main.models import (
+    AboutPage,
+    ContactMessages,
+    HomePage,
+    Terms as T,
+    Privacy as P,
+    Gallery as G,
+)
+
 from portfolio.models import Portfolio
 from services.models import Service
+
 
 class Home(View):
 
     def get(self, request):
 
         page = HomePage.objects.first()
+        about = AboutPage.objects.first()
+
         services = Service.objects.all()
         portfolio = Portfolio.objects.all()
-        about = AboutPage.objects.first()
-        testimonials = about.testimonials.all() if about else []
-        team = about.team.all() if page else []
+
+        testimonials = []
+        team = []
+
+        if about:
+            testimonials = about.testimonials.all()
+            team = about.team.all()
 
         context = {
             "page": page,
             "services": services,
             "portfolio": portfolio,
             "testimonials": testimonials,
-            "team": team
+            "team": team,
         }
 
         return render(request, "main/index.html", context)
 
-
     def post(self, request):
 
-        # обработка формы
         name = request.POST.get("name")
 
-        ...
+        # ... твоя логика формы
 
         return JsonResponse({"status": "success"})
 
@@ -41,14 +55,13 @@ class Home(View):
 class Contact(View):
 
     def get(self, request):
-        return render(
-            request,
-            "main/contact.html",
-            {
-                "title_h1": "Контакти",
-                "breadcrumbs": "Контакти",
-            },
-        )
+
+        context = {
+            "title_h1": "Контакти",
+            "breadcrumbs": "Контакти",
+        }
+
+        return render(request, "main/contact.html", context)
 
     def post(self, request):
 
@@ -90,7 +103,11 @@ class About(View):
     def get(self, request):
 
         page = AboutPage.objects.first()
-        certificates_img = page.images.all() if page else []
+
+        certificates_img = []
+
+        if page:
+            certificates_img = page.images.all()
 
         context = {
             "title_h1": page.h1_about if page else "",
@@ -107,7 +124,11 @@ class Team(View):
     def get(self, request):
 
         page = AboutPage.objects.first()
-        team = page.team.all() if page else []
+
+        team = []
+
+        if page:
+            team = page.team.all()
 
         context = {
             "title_h1": page.h1_team if page else "",
@@ -116,7 +137,7 @@ class Team(View):
         }
 
         return render(request, "main/team.html", context)
-    
+
 
 class Quote(View):
 
@@ -128,7 +149,7 @@ class Quote(View):
         }
 
         return render(request, "main/quote.html", context)
-    
+
 
 class Terms(View):
 
@@ -139,11 +160,11 @@ class Terms(View):
         context = {
             "title_h1": page.h1 if page else "",
             "breadcrumbs": "Terms",
-            "page": page
+            "page": page,
         }
 
         return render(request, "main/terms.html", context)
-    
+
 
 class Privacy(View):
 
@@ -154,11 +175,10 @@ class Privacy(View):
         context = {
             "title_h1": page.h1 if page else "",
             "breadcrumbs": "Privacy",
-            "page": page
+            "page": page,
         }
 
         return render(request, "main/privacy.html", context)
-    
 
 
 class Gallery(View):
@@ -166,14 +186,17 @@ class Gallery(View):
     def get(self, request):
 
         photos_list = G.objects.all()
-        paginator = Paginator(photos_list, 9)  
+
+        paginator = Paginator(photos_list, 9)
+
         page_number = request.GET.get("page")
+
         photos = paginator.get_page(page_number)
 
         context = {
             "title_h1": "Галерея",
             "breadcrumbs": "Галерея",
-            "photos": photos
+            "photos": photos,
         }
 
         return render(request, "main/gallery.html", context)

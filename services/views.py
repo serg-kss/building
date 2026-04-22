@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import View, DetailView
+
+from seo.models import PageSEO
 from .models import Service, ServicePage
 
 
@@ -32,6 +34,12 @@ class ServiceDetailView(DetailView):
     def get_context_data(self, **kwargs):
 
         context = super().get_context_data(**kwargs)
+        service = self.object
         context["title_h1"] = self.object.name
         context["breadcrumbs"] = "Сервіси"
+        context["seo"] = (
+            service.seo
+            or PageSEO.objects.filter(page="services").first()
+        )
+
         return context

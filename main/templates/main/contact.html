@@ -17,8 +17,8 @@
         <div class="contact-wrapper">
           <div class="contact-info-panel">
             <div class="contact-info-header">
-              <h3>Contact Information</h3>
-              <p>Dignissimos deleniti accusamus rerum voluptate. Dignissimos rerum sit maiores reiciendis voluptate inventore ut.</p>
+              <h3>Контактна інформація</h3>
+              <p>Зв’яжіться з нами зручним для вас способом — ми завжди готові допомогти та надати консультацію.</p>
             </div>
 
             <div class="contact-info-cards">
@@ -58,19 +58,19 @@
                 </div>
                 <div class="card-content">
                   <h4>Ми працюємо:</h4>
-                  <p>Пн-Пт: 9AM - 7PM</p>
+                  <p>Пн-Пт: 09:00 – 19:00<br>Сб–Нд: за попереднім записом</p>
                 </div>
               </div>
             </div>
 
             <div class="social-links-panel">
-              <h5>Follow Us</h5>
+              <h5>Підпишись</h5>
               <div class="social-icons">
-                <a href="#"><i class="bi bi-facebook"></i></a>
-                <a href="#"><i class="bi bi-twitter-x"></i></a>
-                <a href="#"><i class="bi bi-instagram"></i></a>
-                <a href="#"><i class="bi bi-linkedin"></i></a>
-                <a href="#"><i class="bi bi-youtube"></i></a>
+                {% if site_twitter != '' %}<a href="{{site_twitter| default:"#"}}"> <i class="bi bi-twitter-x"></i></a>{% endif %}
+                {% if site_facebook != '' %}<a href="{{site_facebook| default:"#"}}"> <i class="bi bi-facebook"></i></a>{% endif %}
+                {% if site_instagram != '' %}<a href="{{site_instagram| default:"#"}}"><i class="bi bi-instagram"></i></a>{% endif %}
+                {% if site_linkedin != '' %}<a href="{{site_linkedin| default:"#"}}"><i class="bi bi-linkedin"></i></a>{% endif %}
+                {% if site_youtube != '' %}<a href="{{site_youtube| default:"#"}}"><i class="bi bi-youtube"></i></a>{% endif %}
               </div>
             </div>
           </div>
@@ -81,10 +81,10 @@
             </div>
 
             <div class="form-container">
-              <h3>Send Us a Message</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipiscing elit mauris hendrerit faucibus imperdiet nec eget felis.</p>
+              <h3>Напишіть нам повідомлення</h3>
+              <p>Заповніть форму нижче, і наш спеціаліст зв’яжеться з вами найближчим часом для консультації або обговорення деталей вашого проекту.</p>
 
-              <form action="forms/contact.php" method="post" class="php-email-form">
+              <form method="post" action="{% url 'main:contact' %}" class="php-email-form">
                 {% csrf_token %}
                 <div class="form-floating mb-3">
                   <input type="text" class="form-control" id="nameInput" name="name" placeholder="Ваше Імʼя" required="">
@@ -92,24 +92,24 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                  <input type="email" class="form-control" id="emailInput" name="email" placeholder="Email" required="">
+                  <input type="email" class="form-control" id="emailInput" name="email" placeholder="Ваш email" required="">
                   <label for="emailInput">Email</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="subjectInput" name="subject" placeholder="Тема" required="">
+                  <input type="text" class="form-control" id="subjectInput" name="subject" placeholder="Тема звернення" required="">
                   <label for="subjectInput">Тема</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                  <textarea class="form-control" id="messageInput" name="message" rows="5" placeholder="Повідомлення" style="height: 150px" required=""></textarea>
+                  <textarea class="form-control" id="messageInput" name="message" rows="5" placeholder="Опишіть ваше питання або проект" style="height: 150px" required=""></textarea>
                   <label for="messageInput">Повідомлення</label>
                 </div>
 
                 <div class="my-3">
-                  <div class="loading">Loading</div>
+                  <div class="loading">Загрузка</div>
                   <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                  <div class="sent-message">Ваше повідомлення надіслано. Дякуємо!</div>
                 </div>
 
                 <div class="d-grid">
@@ -121,5 +121,59 @@
         </div>
       </div>
     </section><!-- /Contact Section -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
 
+  const form = document.querySelector(".php-email-form");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault(); // ⛔ отменяем обычную отправку
+
+    const formData = new FormData(form);
+
+    const loading = form.querySelector(".loading");
+    const errorBox = form.querySelector(".error-message");
+    const successBox = form.querySelector(".sent-message");
+
+    loading.style.display = "block";
+    errorBox.style.display = "none";
+    successBox.style.display = "none";
+
+    fetch(form.action, {
+      method: "POST",
+      body: formData,
+      headers: {
+        "X-CSRFToken": form.querySelector("[name=csrfmiddlewaretoken]").value
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+
+      loading.style.display = "none";
+
+      if (data.status === "success") {
+
+        successBox.style.display = "block";
+        form.reset();
+
+      } else {
+
+        errorBox.style.display = "block";
+        errorBox.innerHTML = data.message || "Помилка відправки";
+
+      }
+
+    })
+    .catch(() => {
+
+      loading.style.display = "none";
+      errorBox.style.display = "block";
+      errorBox.innerHTML = "Помилка сервера";
+
+    });
+
+  });
+
+});
+</script>
 {% endblock content %}

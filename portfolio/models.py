@@ -2,6 +2,8 @@ from django.db import models
 from tinymce.models import HTMLField
 from django.utils.text import slugify
 from main.utils.image import compress_image
+from seo.models import PageSEO
+from django.urls import reverse
 
 
 class Portfolio(models.Model):
@@ -27,6 +29,13 @@ class Portfolio(models.Model):
     img_alt = models.CharField("Опис для зображення", max_length=300, blank=True)
 
     slug = models.SlugField(unique=True)
+    seo = models.OneToOneField(
+        PageSEO,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="portfolio"
+    )
     option_1 = models.CharField("Доп інфо", max_length=50, blank=False, default="")
     option_2 = models.CharField("Срок виконання", max_length=50, blank=False, default="")
     location = models.CharField("Місце розташування", max_length=100, blank=False, default="")
@@ -54,6 +63,12 @@ class Portfolio(models.Model):
         if self.img_main:
             compress_image(self.img_main.path, (1920, 900))
 
+    def get_absolute_url(self):
+
+        return reverse(
+            "portfolio:portfolio-details",
+            kwargs={"slug": self.slug}
+        )
 
     class Meta:
         verbose_name = "Портфоліо"
