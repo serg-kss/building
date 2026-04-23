@@ -1,5 +1,5 @@
 .tox-tinymce {
-    background-color: #212529 !important;
+    background-color: #222222 !important;
     border: 1px solid #495057 !important;
     border-radius: 8px !important;
     box-shadow: none !important;
@@ -7,7 +7,7 @@
 
 
 .tox .tox-menubar {
-    background-color: #212529 !important;
+    background-color: #222222 !important;
     border-bottom: 1px solid #495057 !important;
 }
 
@@ -24,7 +24,7 @@
 
 .tox .tox-toolbar,
 .tox .tox-toolbar__primary {
-    background-color: #212529 !important;
+    background-color: #222222 !important;
     border-bottom: 1px solid #495057 !important;
 }
 
@@ -46,7 +46,7 @@
 
 
 .tox .tox-menu {
-    background-color: #212529 !important;
+    background-color: #222222 !important;
     border: 1px solid #495057 !important;
 }
 
@@ -61,7 +61,7 @@
 }
 
 .tox .tox-statusbar {
-    background-color: #212529 !important;
+    background-color: #222222 !important;
     border-top: 1px solid #495057 !important;
 }
 
@@ -191,7 +191,7 @@
 .tox .tox-toolbar__overflow,
 .tox .tox-toolbar__primary {
 
-    background-color: #212529 !important;
+    background-color: #222222 !important;
 
     background-image: none !important;
 
@@ -219,7 +219,7 @@
 
 .tox .tox-toolbar__overflow .tox-collection__item {
 
-    background-color: #212529 !important;
+    background-color: #222222 !important;
 }
 
 .tox .tox-toolbar__overflow .tox-collection__item:hover {
@@ -398,4 +398,72 @@ select option:focus {
 
     background-color: #495057 !important;
     color: #ffffff !important;
+}
+
+
+/* ===== SELECT2 — полный тёмный стиль ===== */
+
+/* Основное поле */
+
+.select2-container--default .select2-selection--single {
+    background-color: #343a40 !important;
+    border: 1px solid #495057 !important;
+    color: #ffffff !important;
+    height: 38px !important;
+}
+
+
+/* Текст внутри */
+
+.select2-container--default .select2-selection__rendered {
+    color: #ffffff !important;
+}
+
+
+/* Стрелка справа */
+
+.select2-container--default .select2-selection__arrow b {
+    border-color: #ffffff transparent transparent transparent !important;
+}
+
+
+/* Выпадающее меню */
+
+.select2-dropdown {
+    background-color: #343a40 !important;
+    border: 1px solid #495057 !important;
+}
+
+
+/* Поле поиска внутри dropdown */
+
+.select2-search__field {
+    background-color: #212529 !important;
+    color: #ffffff !important;
+    border: 1px solid #495057 !important;
+}
+
+
+/* Элементы списка */
+
+.select2-results__option {
+    background-color: #343a40 !important;
+    color: #ffffff !important;
+}
+
+
+/* Hover */
+
+.select2-results__option--highlighted {
+    background-color: #495057 !important;
+    color: #ffffff !important;
+}
+
+
+/* Убираем синий фокус */
+
+.select2-container--default.select2-container--focus 
+.select2-selection--single {
+    border-color: #495057 !important;
+    box-shadow: none !important;
 }
