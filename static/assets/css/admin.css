@@ -272,3 +272,14 @@ footer.app-footer  {
 #changelist-search {
     visibility: hidden;
 }
+
+
+/* Fix white background in Jazzmin */
+
+.content-wrapper {
+    background-color: #1f2d3d !important;
+}
+
+body {
+    background-color: #1f2d3d !important;
+}
