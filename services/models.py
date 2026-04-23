@@ -4,9 +4,25 @@ from django.utils.text import slugify
 from main.utils.image import compress_image
 from tinymce.models import HTMLField
 from django.urls import reverse
-
 from seo.models import PageSEO
+import os
+from django.conf import settings
 
+
+def upload_to_folder(folder):
+    def wrapper(instance, filename):
+
+        path = os.path.join(
+            settings.MEDIA_ROOT,
+            folder
+        )
+
+        # создаёт папку если её нет
+        os.makedirs(path, exist_ok=True)
+
+        return f"{folder}/{filename}"
+
+    return wrapper
 
 class ServicePage(models.Model):
 
@@ -15,7 +31,7 @@ class ServicePage(models.Model):
     sub_text = models.TextField("Доп текст", max_length=500, blank=True, default="")
     img_main = models.ImageField(
         "Зображення",
-        upload_to="service/"
+        upload_to=upload_to_folder("service")
     )
     img_main_alt = models.CharField("Опис для зображення", max_length=300, blank=True)
 
@@ -80,7 +96,7 @@ class Service(models.Model):
     )
     img_main = models.ImageField(
         "Зображення",
-        upload_to="service/"
+        upload_to=upload_to_folder("service")
     )
     img_main_alt = models.CharField("Опис для зображення", max_length=300, blank=True)
     title = models.CharField("Назва сервісу", max_length=200, blank=True, default="")

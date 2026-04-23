@@ -4,6 +4,24 @@ from django.utils.text import slugify
 from main.utils.image import compress_image
 from seo.models import PageSEO
 from django.urls import reverse
+import os
+from django.conf import settings
+
+
+def upload_to_folder(folder):
+    def wrapper(instance, filename):
+
+        path = os.path.join(
+            settings.MEDIA_ROOT,
+            folder
+        )
+
+        # создаёт папку если её нет
+        os.makedirs(path, exist_ok=True)
+
+        return f"{folder}/{filename}"
+
+    return wrapper
 
 
 class Portfolio(models.Model):
@@ -24,7 +42,7 @@ class Portfolio(models.Model):
     content_brif = models.TextField("Опис проекту (коротко)", max_length=500, blank=False, default="")
     img = models.ImageField(
         "Зображення",
-        upload_to="portfolio/"
+        upload_to=upload_to_folder("portfolio")
     )
     img_alt = models.CharField("Опис для зображення", max_length=300, blank=True)
 
@@ -48,7 +66,7 @@ class Portfolio(models.Model):
     )
     img_main = models.ImageField(
         "Зображення головне",
-        upload_to="portfolio/"
+        upload_to=upload_to_folder("portfolio")
     )
     img_main_alt = models.CharField("Опис для зображення", max_length=300, blank=True)
 
@@ -114,7 +132,7 @@ class TechnicalDetails(models.Model):
     )
     img_doc = models.ImageField(
         "Зображення документація",
-        upload_to="portfolio/"
+        upload_to=upload_to_folder("portfolio")
     )
     img_doc_alt = models.CharField("Опис для зображення", max_length=300, blank=True)
 
@@ -153,7 +171,7 @@ class PortfolioImage(models.Model):
 
     image = models.ImageField(
         "Портфоліо фото",
-        upload_to="portfolio/"
+        upload_to=upload_to_folder("portfolio")
     )
 
     alt_text = models.CharField(

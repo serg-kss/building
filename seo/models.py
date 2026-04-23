@@ -1,5 +1,22 @@
 from django.db import models
+import os
+from django.conf import settings
 
+
+def upload_to_folder(folder):
+    def wrapper(instance, filename):
+
+        path = os.path.join(
+            settings.MEDIA_ROOT,
+            folder
+        )
+
+        # создаёт папку если её нет
+        os.makedirs(path, exist_ok=True)
+
+        return f"{folder}/{filename}"
+
+    return wrapper
 
 class PageSEO(models.Model):
 
@@ -95,7 +112,7 @@ class PageSEO(models.Model):
 
     og_image = models.ImageField(
         "OG Image",
-        upload_to="seo/",
+        upload_to=upload_to_folder("seo"),
         blank=True,
         null=True
     )
