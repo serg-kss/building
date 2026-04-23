@@ -467,7 +467,3 @@ select option:focus {
     border-color: #495057 !important;
     box-shadow: none !important;
 }
-
-.mce-content-body  {
-    background-color: #222222;
-}

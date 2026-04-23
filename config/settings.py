@@ -302,7 +302,7 @@ TINYMCE_DEFAULT_CONFIG = {
 
     "content_style": """
         body {
-            background-color: #212529;
+            background-color: #222222;
             color: #f8f9fa;
             font-size: 16px;
         }
