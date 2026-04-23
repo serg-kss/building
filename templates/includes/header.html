@@ -37,11 +37,10 @@
             <li><a href="{% url "main:team" %}" class="{% if current_url == 'team' %}active{% endif %}">Команда</a></li>
             <li class="dropdown"><a href="#"><span>More Pages</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
               <ul>
-                <li><a href="service-details.html">Service Details</a></li>
                 <li><a href="{% url "main:gallery" %}">Gallety</a></li>
-                <li><a href="{% url "main:quote" %}">Quote Form</a></li>
                 <li><a href="{% url "main:terms" %}">Terms</a></li>
                 <li><a href="{% url "main:privacy" %}">Privacy</a></li>
+                <li><a href="{% url "cookie_consent_cookie_group_list" %}">Cookies</a></li>
               </ul>
             </li>
             <li><a href="{% url "main:contact" %}" class="{% if current_url == 'contact' %}active{% endif %}">Контакти</a></li>
