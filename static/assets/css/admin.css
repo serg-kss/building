@@ -467,3 +467,7 @@ select option:focus {
     border-color: #495057 !important;
     box-shadow: none !important;
 }
+
+#tinymce {
+    background-color: #222222;
+}
