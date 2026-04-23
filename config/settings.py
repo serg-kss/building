@@ -191,7 +191,6 @@ JAZZMIN_SETTINGS = {
     "show_ui_builder": False,
     "navigation_expanded": True,
 
-    "hide_apps": [],
     "hide_models": [],
 
     "order_with_respect_to": [
@@ -249,7 +248,7 @@ JAZZMIN_UI_TWEAKS = {
 
     "accent": "accent-primary",
 
-    "navbar": "navbar-white navbar-light",
+    "navbar": "navbar-dark",
     "no_navbar_border": False,
 
     "sidebar": "sidebar-dark-primary",
