@@ -279,3 +279,8 @@ footer.app-footer  {
 .app-main {
     background-color: #292929 !important;
 }
+
+.breadcrumb {
+    padding-left: 10px;
+    padding-right: 10px;
+}
