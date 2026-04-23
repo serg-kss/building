@@ -467,3 +467,30 @@ select option:focus {
     border-color: #495057 !important;
     box-shadow: none !important;
 }
+
+
+/* ===== DISABLED поля (сообщения клиентов) ===== */
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+
+    background-color: #343a40 !important;
+    color: #adb5bd !important;
+
+    border: 1px solid #495057 !important;
+
+    opacity: 1 !important; /* убирает "выцветание" */
+}
+
+
+/* Для Jazzmin контейнеров */
+
+.form-control:disabled,
+.form-control[readonly] {
+
+    background-color: #343a40 !important;
+    color: #adb5bd !important;
+
+    border: 1px solid #495057 !important;
+}
