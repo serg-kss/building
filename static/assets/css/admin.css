@@ -283,3 +283,31 @@ footer.app-footer  {
 .breadcrumb {
     --bs-breadcrumb-bg: none;
 }
+
+
+/* Fix Chrome autofill white background */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+
+    -webkit-box-shadow: 0 0 0px 1000px #343a40 inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+
+/* Fix select2 autofill */
+
+.select2-container--default .select2-selection--single {
+    background-color: #343a40 !important;
+    color: #fff !important;
+}
+
+.select2-dropdown {
+    background-color: #343a40 !important;
+    color: #fff !important;
+}
