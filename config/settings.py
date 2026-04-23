@@ -177,7 +177,7 @@ JAZZMIN_SETTINGS = {
     "site_title": "БІЛДІНГ ЕСТЕЙТ Admin",
     "site_header": "Building CMS",
     "site_brand": "БІЛДІНГ ЕСТЕЙТ",
-    "custom_css": "assets/css/admin.css",
+    #"custom_css": "assets/css/admin.css",
 
     "welcome_sign": "Керування сайтом",
 
