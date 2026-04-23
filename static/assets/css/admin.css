@@ -468,6 +468,6 @@ select option:focus {
     box-shadow: none !important;
 }
 
-#tinymce {
+.mce-content-body  {
     background-color: #222222;
 }
