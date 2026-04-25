@@ -1,5 +1,4 @@
 {% load static %}
-{% load i18n %}
 
   <header id="header" class="header sticky-top dark-background">
 
@@ -17,15 +16,13 @@
           {% if site_youtube != '' %}<a href="{{site_youtube| default:"#"}}"><i class="bi bi-youtube"></i></a>{% endif %}
         </div>
       </div>
-    </div><!-- End Top Bar -->
+    </div>
 
     <div class="branding d-flex align-items-cente">
 
       <div class="container position-relative d-flex align-items-center justify-content-between">
         <a href="{% url "main:index" %}" class="logo d-flex align-items-center">
-          <!-- Uncomment the line below if you also wish to use an image logo -->
-           <img src="{% static "assets/img/logo-part.jpg" %}" alt=""> 
-          <!--<h1 class="sitename">БІЛДІНГ ЕСТЕЙТ</h1>-->
+           <img src="{% static "assets/img/logo-part.jpg" %}" alt="БІЛДІНГ ЕСТЕЙТ"> 
         </a>
       {% with current_url=request.resolver_match.url_name %}
         <nav id="navmenu" class="navmenu">
@@ -35,14 +32,7 @@
             <li><a href="{% url "services:services" %}" class="{% if current_url == 'services' %}active{% endif %}">Послуги</a></li>
             <li><a href="{% url "portfolio:portfolio" %}" class="{% if current_url == 'portfolio' %}active{% endif %}">Проекти</a></li>
             <li><a href="{% url "main:team" %}" class="{% if current_url == 'team' %}active{% endif %}">Команда</a></li>
-            <li class="dropdown"><a href="#"><span>More Pages</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="{% url "main:gallery" %}">Gallety</a></li>
-                <li><a href="{% url "main:terms" %}">Terms</a></li>
-                <li><a href="{% url "main:privacy" %}">Privacy</a></li>
-                <li><a href="{% url "cookie_consent_cookie_group_list" %}">Cookies</a></li>
-              </ul>
-            </li>
+            <li><a href="{% url "main:gallery" %}">Галерея</a></li>
             <li><a href="{% url "main:contact" %}" class="{% if current_url == 'contact' %}active{% endif %}">Контакти</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

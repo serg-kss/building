@@ -1,5 +1,4 @@
 {% load static %}
-{% load i18n %}
 
     <footer id="footer" class="footer dark-background">
 
@@ -7,7 +6,7 @@
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-about">
           <a href="{% url "main:index" %}" class="logo d-flex align-items-center">
-            <img src="{% static "assets/img/logo.jpg" %}" alt="">
+            <img src="{% static "assets/img/logo.jpg" %}" alt="БІЛДІНГ ЕСТЕЙТ">
           </a>
           <div class="social-links d-flex mt-4">
           {% if site_twitter != '' %}<a href="{{site_twitter| default:"#"}}"><i class="bi bi-twitter-x"></i></a>{% endif %}
@@ -19,24 +18,21 @@
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
-          <h4>Корисні посилання</h4>
+          <h4>БІЛДІНГ ЕСТЕЙТ</h4>
           <ul>
             <li><a href="{% url "main:index" %}">Головна</a></li>
             <li><a href="{% url "main:about" %}">Про компанію</a></li>
-            <li><a href="{% url "main:terms" %}">Умови користування</a></li>
-            <li><a href="{% url "main:privacy" %}">Політика конфеденційності</a></li>
-            <li><a href="{% url "cookie_consent_cookie_group_list" %}">Cookies</a></li>
+            <li><a href="{% url "services:services" %}" class="{% if current_url == 'services' %}active{% endif %}">Послуги</a></li>
+            <li><a href="{% url "portfolio:portfolio" %}" class="{% if current_url == 'portfolio' %}active{% endif %}">Проекти</a></li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
-          <h4>Наші послуги</h4>
+          <h4>Корисні посилання</h4>
           <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
+            <li><a href="{% url "main:terms" %}">Умови користування</a></li>
+            <li><a href="{% url "main:privacy" %}">Політика конфеденційності</a></li>
+            <li><a href="{% url "cookie_consent_cookie_group_list" %}">Cookies</a></li>
           </ul>
         </div>
 
@@ -63,7 +59,7 @@
     </div>
 
     <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">БІЛДІНГ ЕСТЕЙТ</strong> <span>All Rights Reserved</span></p>
+      <p>© <span>Авторське право</span> <strong class="px-1 sitename">БІЛДІНГ ЕСТЕЙТ</strong> <span>Всі права захищено</span></p>
     </div>
 
   </footer>

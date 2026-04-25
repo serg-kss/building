@@ -9,7 +9,6 @@
 
     {% include "main/includes/page_title.html" %}
 
-    <!-- Services Section -->
     <section id="services" class="services section">
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -23,7 +22,7 @@
                 <i class="bi bi-building"></i>
               </div>
               <h3>{{item.name}}</h3>
-              <p>{{item.sub_text}}</p>
+              <p>{{item.sub_text|truncatechars:150}}</p>
               <div class="service-features">
                 <span><i class="bi bi-check-circle"></i> {{item.option_1}}</span>
                 <span><i class="bi bi-check-circle"></i> {{item.option_2}}</span>
@@ -31,7 +30,7 @@
               </div>
               <a href="{% url "services:service" item.slug %}" class="service-link">Детальніше <i class="bi bi-arrow-right"></i></a>
             </div>
-          </div><!-- End Service Item -->
+          </div>
           {% endfor %}
         </div>
 
@@ -57,7 +56,7 @@
                     <h4>{{service.option_title}}</h4>
                     <p>{{service.option_text}}</p>
                   </div>
-                </div><!-- End Service List Item -->
+                </div>
                 {% endfor %}
               </div>
             </div>
@@ -66,6 +65,6 @@
 
       </div>
 
-    </section><!-- /Services Section -->
+    </section>
 
 {% endblock content %}
