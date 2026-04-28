@@ -141,7 +141,7 @@
           </div>
         </div>
 
-        {% if not portfolio.document.all %}
+        {% if portfolio.document.exists %}
         <div class="technical-gallery aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
           <div class="gallery-header">
             <h3>Технічна документація</h3>
