@@ -3,7 +3,7 @@ from adminsortable2.admin import SortableAdminBase, SortableInlineAdminMixin
 from django.utils.html import format_html
 
 from main.admin_mixins import SingletonAdmin
-from portfolio.models import Portfolio, PortfolioDetailsData, PortfolioPage, TechnicalDetails, PortfolioImage
+from portfolio.models import Portfolio, PortfolioAddInfo, PortfolioDetailsData, PortfolioPage, TechnicalDetails, PortfolioImage
 
 
 class PortfolioDetailsDataInline(SortableInlineAdminMixin, admin.StackedInline):
@@ -16,6 +16,23 @@ class PortfolioDetailsDataInline(SortableInlineAdminMixin, admin.StackedInline):
             "fields": (
                 "key",
                 "feture",
+            )
+        }),
+
+    )
+
+class PortfolioAddInfoInline(SortableInlineAdminMixin, admin.StackedInline):
+    model = PortfolioAddInfo
+    extra = 0
+    ordering = ("order",)
+
+    fieldsets = (
+        ("- Доп статистика", {
+            "fields": (
+                "extr_key",
+                "extr_feture",
+                "extr_key_1",
+                "extr_feture_1",
             )
         }),
 
@@ -86,7 +103,7 @@ class PortfolioAdmin(SortableAdminBase, admin.ModelAdmin):
             "all": ("assets/css/admin.css",)
         }
 
-    inlines = [PortfolioDetailsDataInline, TechnicalDetailsInline, PortfolioImageInline]
+    inlines = [PortfolioAddInfoInline, PortfolioDetailsDataInline, TechnicalDetailsInline, PortfolioImageInline]
 
     fieldsets = (
         ("Картка проекта", {

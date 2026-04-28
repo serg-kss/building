@@ -32,26 +32,18 @@
                 <p class="summary-text">{{portfolio.content_brif}}</p>
 
                 <div class="key-metrics">
+                  {% for item in portfolio.add_data.all %}
                   <div class="metric-row">
                     <div class="metric">
-                      <span class="metric-title">Timeline</span>
-                      <span class="metric-data">24 months</span>
+                      <span class="metric-title">{{item.extr_key}}</span>
+                      <span class="metric-data">{{item.extr_feture}}</span>
                     </div>
                     <div class="metric">
-                      <span class="metric-title">Total Area</span>
-                      <span class="metric-data">65,000 sq ft</span>
+                      <span class="metric-title">{{item.extr_key_1}}</span>
+                      <span class="metric-data">{{item.extr_feture_1}}</span>
                     </div>
                   </div>
-                  <div class="metric-row">
-                    <div class="metric">
-                      <span class="metric-title">Budget</span>
-                      <span class="metric-data">$8.5M</span>
-                    </div>
-                    <div class="metric">
-                      <span class="metric-title">Units</span>
-                      <span class="metric-data">42 apartments</span>
-                    </div>
-                  </div>
+                  {% endfor %}
                 </div>
               </div>
             </div>

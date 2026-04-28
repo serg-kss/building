@@ -9,20 +9,22 @@ import os
 from django.conf import settings
 
 
-def upload_to_folder(folder):
-    def wrapper(instance, filename):
+from functools import partial
 
-        path = os.path.join(
-            settings.MEDIA_ROOT,
-            folder
-        )
 
-        # создаёт папку если её нет
-        os.makedirs(path, exist_ok=True)
+def upload_to_folder(instance, filename, folder):
+    path = os.path.join(
+        settings.MEDIA_ROOT,
+        folder
+    )
 
-        return f"{folder}/{filename}"
+    os.makedirs(path, exist_ok=True)
 
-    return wrapper
+    return f"{folder}/{filename}"
+
+
+upload_home_service = partial(upload_to_folder, folder="service")
+
 
 class ServicePage(models.Model):
 
@@ -31,7 +33,7 @@ class ServicePage(models.Model):
     sub_text = models.TextField("Доп текст", max_length=500, blank=True, default="")
     img_main = models.ImageField(
         "Зображення",
-        upload_to=upload_to_folder("service")
+        upload_to=upload_home_service
     )
     img_main_alt = models.CharField("Опис для зображення", max_length=300, blank=True)
 
@@ -59,8 +61,8 @@ class ServicePageExtraServices(models.Model):
     verbose_name="Доп послуга"
     )
 
-    option_title = models.CharField("Заголовок", max_length=200, blank=False, default="Services")
-    option_text = models.CharField("Текст", max_length=200, blank=False, default="Services")
+    option_title = models.CharField("Заголовок", max_length=200, blank=True, default="Services")
+    option_text = models.CharField("Текст", max_length=200, blank=True, default="Services")
     order = models.PositiveIntegerField(
         "Порядок",
         default=0
@@ -96,7 +98,7 @@ class Service(models.Model):
     )
     img_main = models.ImageField(
         "Зображення",
-        upload_to=upload_to_folder("service")
+        upload_to=upload_home_service
     )
     img_main_alt = models.CharField("Опис для зображення", max_length=300, blank=True)
     title = models.CharField("Назва сервісу", max_length=200, blank=True, default="")
@@ -132,8 +134,8 @@ class ServiceDetailsData(models.Model):
     related_name="data"
     )
 
-    key = models.CharField("Параметр", max_length=100, blank=False, default="")
-    feture = models.CharField("Значення", max_length=100, blank=False, default="")
+    key = models.CharField("Параметр", max_length=100, blank=True, default="")
+    feture = models.CharField("Значення", max_length=100, blank=True, default="")
 
     order = models.PositiveIntegerField(
         "Порядок",

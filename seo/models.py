@@ -3,20 +3,22 @@ import os
 from django.conf import settings
 
 
-def upload_to_folder(folder):
-    def wrapper(instance, filename):
+from functools import partial
 
-        path = os.path.join(
-            settings.MEDIA_ROOT,
-            folder
-        )
 
-        # создаёт папку если её нет
-        os.makedirs(path, exist_ok=True)
+def upload_to_folder(instance, filename, folder):
+    path = os.path.join(
+        settings.MEDIA_ROOT,
+        folder
+    )
 
-        return f"{folder}/{filename}"
+    os.makedirs(path, exist_ok=True)
 
-    return wrapper
+    return f"{folder}/{filename}"
+
+
+upload_home_seo = partial(upload_to_folder, folder="seo")
+
 
 class PageSEO(models.Model):
 
@@ -112,7 +114,7 @@ class PageSEO(models.Model):
 
     og_image = models.ImageField(
         "OG Image",
-        upload_to=upload_to_folder("seo"),
+        upload_to=upload_home_seo,
         blank=True,
         null=True
     )

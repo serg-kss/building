@@ -8,21 +8,21 @@ import os
 from django.conf import settings
 
 
-def upload_to_folder(folder):
-    def wrapper(instance, filename):
+from functools import partial
 
-        path = os.path.join(
-            settings.MEDIA_ROOT,
-            folder
-        )
 
-        # создаёт папку если её нет
-        os.makedirs(path, exist_ok=True)
+def upload_to_folder(instance, filename, folder):
+    path = os.path.join(
+        settings.MEDIA_ROOT,
+        folder
+    )
 
-        return f"{folder}/{filename}"
+    os.makedirs(path, exist_ok=True)
 
-    return wrapper
+    return f"{folder}/{filename}"
 
+
+upload_home_portfolio = partial(upload_to_folder, folder="portfolio")
 
 class Portfolio(models.Model):
 
@@ -37,12 +37,12 @@ class Portfolio(models.Model):
         choices=Status.choices,
         default=Status.NEW,
     )    
-    name = models.CharField("Назва Проекту", max_length=100, blank=False, default="")
-    type = models.CharField("Тип Проекту", max_length=100, blank=False, default="")
-    content_brif = models.TextField("Опис проекту (коротко)", max_length=500, blank=False, default="")
+    name = models.CharField("Назва Проекту", max_length=100, blank=True, default="")
+    type = models.CharField("Тип Проекту", max_length=100, blank=True, default="")
+    content_brif = models.TextField("Опис проекту (коротко)", max_length=500, blank=True, default="")
     img = models.ImageField(
         "Зображення",
-        upload_to=upload_to_folder("portfolio")
+        upload_to=upload_home_portfolio
     )
     img_alt = models.CharField("Опис для зображення", max_length=300, blank=True)
 
@@ -54,19 +54,19 @@ class Portfolio(models.Model):
         blank=True,
         related_name="portfolio"
     )
-    option_1 = models.CharField("Доп інфо", max_length=50, blank=False, default="")
-    option_2 = models.CharField("Срок виконання", max_length=50, blank=False, default="")
-    location = models.CharField("Місце розташування", max_length=100, blank=False, default="")
+    option_1 = models.CharField("Доп інфо", max_length=50, blank=True, default="")
+    option_2 = models.CharField("Срок виконання", max_length=50, blank=True, default="")
+    location = models.CharField("Місце розташування", max_length=100, blank=True, default="")
 
 
-    option_3 = models.CharField("Доп інфо 1", max_length=50, blank=False, default="")
-    option_4 = models.CharField("Доп інфо 2", max_length=50, blank=False, default="")
+    option_3 = models.CharField("Доп інфо 1", max_length=50, blank=True, default="")
+    option_4 = models.CharField("Доп інфо 2", max_length=50, blank=True, default="")
     content = HTMLField(
         "Опис проекту"
     )
     img_main = models.ImageField(
         "Зображення головне",
-        upload_to=upload_to_folder("portfolio")
+        upload_to=upload_home_portfolio
     )
     img_main_alt = models.CharField("Опис для зображення", max_length=300, blank=True)
 
@@ -95,6 +95,29 @@ class Portfolio(models.Model):
     def __str__(self):
         return f"{self.name}"
     
+
+class PortfolioAddInfo(models.Model):
+    add_data = models.ForeignKey(
+    Portfolio,
+    on_delete=models.CASCADE,
+    related_name="add_data"
+    )
+
+    extr_key = models.CharField("Параметр", max_length=100, blank=True, default="")
+    extr_feture = models.CharField("Значення", max_length=100, blank=True, default="")
+    extr_key_1 = models.CharField("Параметр", max_length=100, blank=True, default="")
+    extr_feture_1 = models.CharField("Значення", max_length=100, blank=True, default="")
+
+
+    order = models.PositiveIntegerField(
+        "Порядок",
+        default=0
+    )
+
+    class Meta:
+        verbose_name = "Доп інформація"
+        verbose_name_plural = "Доп інформація"
+
     
 class PortfolioDetailsData(models.Model):
 
@@ -104,8 +127,8 @@ class PortfolioDetailsData(models.Model):
     related_name="data"
     )
 
-    key = models.CharField("Параметр", max_length=100, blank=False, default="")
-    feture = models.CharField("Значення", max_length=100, blank=False, default="")
+    key = models.CharField("Параметр", max_length=100, blank=True, default="")
+    feture = models.CharField("Значення", max_length=100, blank=True, default="")
 
     order = models.PositiveIntegerField(
         "Порядок",
@@ -125,14 +148,14 @@ class TechnicalDetails(models.Model):
     related_name="document"
     )
 
-    doc_name = models.CharField("Назва Проекту", max_length=100, blank=False, default="")
-    slug = models.SlugField()
+    doc_name = models.CharField("Назва Проекту", max_length=100, blank=True, default="")
+    slug = models.SlugField(unique=True)
     doc_content = HTMLField(
         "Технічна документація"
     )
     img_doc = models.ImageField(
         "Зображення документація",
-        upload_to=upload_to_folder("portfolio")
+        upload_to=upload_home_portfolio
     )
     img_doc_alt = models.CharField("Опис для зображення", max_length=300, blank=True)
 
@@ -171,7 +194,7 @@ class PortfolioImage(models.Model):
 
     image = models.ImageField(
         "Портфоліо фото",
-        upload_to=upload_to_folder("portfolio")
+        upload_to=upload_home_portfolio
     )
 
     alt_text = models.CharField(
@@ -201,7 +224,7 @@ class PortfolioImage(models.Model):
 
 class PortfolioPage(models.Model):
   
-    h1 = models.CharField("Заголовок сторінки", max_length=200, blank=False, default="")
+    h1 = models.CharField("Заголовок сторінки", max_length=200, blank=True, default="")
 
     class Meta:
         verbose_name = "Портфоліо сторінка"

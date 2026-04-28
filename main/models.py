@@ -3,22 +3,22 @@ from main.utils.image import compress_image
 from tinymce.models import HTMLField
 import os
 from django.conf import settings
+from functools import partial
 
 
-def upload_to_folder(folder):
-    def wrapper(instance, filename):
+def upload_to_folder(instance, filename, folder):
+    path = os.path.join(
+        settings.MEDIA_ROOT,
+        folder
+    )
 
-        path = os.path.join(
-            settings.MEDIA_ROOT,
-            folder
-        )
+    os.makedirs(path, exist_ok=True)
 
-        # создаёт папку если её нет
-        os.makedirs(path, exist_ok=True)
+    return f"{folder}/{filename}"
 
-        return f"{folder}/{filename}"
 
-    return wrapper
+upload_home_main = partial(upload_to_folder, folder="home_main")
+
     
     
 class ContactMessages(models.Model):
@@ -86,7 +86,7 @@ class HomePage(models.Model):
     hero_years_experience = models.CharField("Вступ: Роки на ринку", max_length=10)
     hero_projects_completed = models.CharField("Вступ: Завершено проектів", max_length=10)
     hero_satisfied_clients = models.CharField("Вступ: Кількість клієнтів", max_length=10)
-    hero_img = models.ImageField("Вступ: Зображення (1920 × 1080)", upload_to=upload_to_folder("home_main"))
+    hero_img = models.ImageField("Вступ: Зображення (1920 × 1080)", upload_to=upload_home_main)
     hero_img_alt = models.CharField("Вступ: Зображення - опис (alt)", max_length=300)
     hero_video = models.URLField("Ютуб посилання")
 
@@ -100,7 +100,7 @@ class HomePage(models.Model):
     sub_text_certif = models.CharField("Сертифікати: Доп текст розділу", max_length=500)
     title_certif = models.CharField("Сертифікати: Заголовок", max_length=255)
     text_certif = models.TextField("Сертифікати: Текст")
-    img_certif = models.ImageField("Сертифікати: Зображення (1920 × 1080)", upload_to=upload_to_folder("home_main"))
+    img_certif = models.ImageField("Сертифікати: Зображення (1920 × 1080)", upload_to=upload_home_main)
     img_certif_alt = models.CharField("Сертифікати: Зображення - опис (alt)", max_length=300)
     title_certif_img = models.CharField("Сертифікати: Заголовок блок з зображенням", max_length=255)
     text_certif_img = models.TextField("Сертифікати: Текст блок з зображенням")
@@ -146,7 +146,7 @@ class HomePageCertifCreator(models.Model):
     text = models.TextField("Опис", max_length=600)
     img = models.ImageField(
         "Зображення сертифікату",
-        upload_to=upload_to_folder("home_main"),
+        upload_to=upload_home_main,
         null=True
     )
     alt_img = models.CharField(
@@ -181,7 +181,7 @@ class AboutPage(models.Model):
     history_text = HTMLField("Історія Компанії")
     history_img_left = models.ImageField(
         "Зображення (left)",
-        upload_to=upload_to_folder("home_main"),
+        upload_to=upload_home_main,
          null=True
     )
     alt_img_left = models.CharField(
@@ -192,7 +192,7 @@ class AboutPage(models.Model):
     )
     history_img_right = models.ImageField(
         "Зображення (right)",
-        upload_to=upload_to_folder("home_main"),
+        upload_to=upload_home_main,
          null=True,
     )
     alt_img_right = models.CharField(
@@ -239,7 +239,7 @@ class AboutImage(models.Model):
 
     image = models.ImageField(
         "Зображення сертифікатів",
-        upload_to=upload_to_folder("home_main")
+        upload_to=upload_home_main
     )
 
     alt_text = models.CharField(
@@ -285,7 +285,7 @@ class TeamAboutPage(models.Model):
     option_2 = models.CharField("Доп інфо 2", max_length=50, blank=True)
     team_img = models.ImageField(
         "Зображення",
-        upload_to=upload_to_folder("home_main")
+        upload_to=upload_home_main
     )
     order = models.PositiveIntegerField(
         "Порядок",
@@ -320,7 +320,7 @@ class TestimonialsAboutPage(models.Model):
     testimonials_message = models.TextField("Відгук")
     testimonials_img = models.ImageField(
         "Аватар",
-        upload_to=upload_to_folder("home_main")
+        upload_to=upload_home_main
     )
     order = models.PositiveIntegerField(
         "Порядок",
@@ -379,7 +379,7 @@ class Gallery(models.Model):
 
     img = models.ImageField(
         "Фото - галерея",
-        upload_to=upload_to_folder("home_main")
+        upload_to=upload_home_main
     )
     alt_img = models.CharField(
         "Alt текст",
