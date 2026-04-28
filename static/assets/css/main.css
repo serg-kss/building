@@ -5500,3 +5500,13 @@ margin-top: 4px;
 #service-details .value {
   text-align: end;
 }
+
+/* Мобильные устройства */
+@media (max-width: 768px) {
+
+    #cw {
+        display: flex;
+        flex-direction: column;
+    }
+
+}
