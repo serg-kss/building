@@ -9,7 +9,6 @@
 
     {% include "main/includes/page_title.html" %}
 
-    <!-- About Section -->
     <section id="about" class="about section">
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -39,22 +38,28 @@
                   </div>
                 </div>
               </div>
+              
+              <div class="cta-container mt-5" data-aos="fade-up" data-aos-delay="800">
+                <a href="{{page.history_video}}" class="btn btn-primary">Переглянути відео про компанію</a>
+              </div>
 
               <div class="certifications mt-5" data-aos="fade-up" data-aos-delay="700">
-                <h5>Сертифікація та партнерство</h5>
+                <h5>Сертифікація, дозволи та партнерство</h5>
 
                 <div class="row g-3 align-items-center">
                 {% for img in certificates_img %}
                   <div class="col-4 col-md-3">
-                    <img src="{{img.image.url}}" alt="{{img.alt_text}}" class="img-fluid">
+                    <div class="gallery-item">
+                      <a href="{{img.image.url}}" class="gallery-overlay glightbox">
+                        <img src="{{img.image.url}}" alt="{{img.alt_text}}" class="img-fluid" loading="lazy">
+                      </a>
+                    </div>
                   </div>
                 {% endfor %}
                 </div>
               </div>
 
-              <div class="cta-container mt-5" data-aos="fade-up" data-aos-delay="800">
-                <a href="{{page.history_video}}" class="btn btn-primary">Переглянути відео про компанію</a>
-              </div>
+
             </div>
           </div>
 
@@ -74,7 +79,6 @@
 
       </div>
 
-    </section><!-- /About Section -->
-
+    </section>
 
 {% endblock content %}
