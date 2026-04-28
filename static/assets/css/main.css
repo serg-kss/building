@@ -1649,7 +1649,7 @@ section,
 @media (max-width: 768px) {
   .projects .project-visual {
     flex: none;
-    height: 400px;
+    height: 430px;
   }
 }
 
