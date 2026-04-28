@@ -962,8 +962,8 @@ section,
 
 .hero .hero-image .image-badge {
   position: absolute;
-  bottom: 30px;
-  left: 30px;
+  bottom: 10px;
+  left: 10px;
   background-color: var(--accent-color);
   color: var(--contrast-color);
   padding: 15px 20px;
