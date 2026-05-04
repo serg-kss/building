@@ -4,6 +4,7 @@ from tinymce.models import HTMLField
 import os
 from django.conf import settings
 from functools import partial
+from portfolio.models import Portfolio
 
 
 def upload_to_folder(instance, filename, folder):
@@ -376,6 +377,15 @@ class Gallery(models.Model):
 
     title = models.CharField("Заголовок", max_length=255, default="")
     text = models.CharField("Опис", max_length=500, default="")
+
+    project = models.ForeignKey(
+        Portfolio,
+        on_delete=models.SET_NULL,
+        related_name='gallery_images',
+        verbose_name="Проект",
+        blank=True,
+        null=True
+    )
 
     img = models.ImageField(
         "Фото - галерея",

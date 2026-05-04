@@ -8,13 +8,6 @@
           <a href="{% url "main:index" %}" class="logo d-flex align-items-center">
             <img src="{% static "assets/img/logo.jpg" %}" alt="БІЛДІНГ ЕСТЕЙТ">
           </a>
-          <div class="social-links d-flex mt-4">
-          {% if site_twitter != '' %}<a href="{{site_twitter| default:"#"}}"><i class="bi bi-twitter-x"></i></a>{% endif %}
-          {% if site_facebook != '' %}<a href="{{site_facebook| default:"#"}}"><i class="bi bi-facebook"></i></a>{% endif %}
-          {% if site_instagram != '' %}<a href="{{site_instagram| default:"#"}}"><i class="bi bi-instagram"></i></a>{% endif %}
-          {% if site_linkedin != '' %}<a href="{{site_linkedin| default:"#"}}"><i class="bi bi-linkedin"></i></a>{% endif %}
-          {% if site_youtube != '' %}<a href="{{site_youtube| default:"#"}}"><i class="bi bi-youtube"></i></a>{% endif %}
-          </div>
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
@@ -41,18 +34,25 @@
           <p>{{site_address}}</p>
           <p>{{site_city}}</p>
           <p>Україна</p>
-            <p class="mt-4">
-              <strong>Тел:</strong>
-              <span>
-                {{ site_phone }}
-              </span>
-            </p>
-            <p>
-              <strong>Email:</strong>
-              <span>
-                {{ site_email }}
-              </span>
-            </p>
+          <p class="mt-4">
+            <strong>Тел:</strong>
+            <span>
+              {{ site_phone }}
+            </span>
+          </p>
+          <p>
+            <strong>Email:</strong>
+            <span>
+              {{ site_email }}
+            </span>
+          </p>
+          <div class="social-links d-flex mt-4">
+          {% if site_twitter != '' %}<a href="{{site_twitter| default:"#"}}"><i class="bi bi-twitter-x"></i></a>{% endif %}
+          {% if site_facebook != '' %}<a href="{{site_facebook| default:"#"}}"><i class="bi bi-facebook"></i></a>{% endif %}
+          {% if site_instagram != '' %}<a href="{{site_instagram| default:"#"}}"><i class="bi bi-instagram"></i></a>{% endif %}
+          {% if site_linkedin != '' %}<a href="{{site_linkedin| default:"#"}}"><i class="bi bi-linkedin"></i></a>{% endif %}
+          {% if site_youtube != '' %}<a href="{{site_youtube| default:"#"}}"><i class="bi bi-youtube"></i></a>{% endif %}
+          </div>
         </div>
 
       </div>

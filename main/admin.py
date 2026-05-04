@@ -202,7 +202,6 @@ class TeamAboutInline(SortableInlineAdminMixin, admin.StackedInline):
             "fields": (
                 "email",
                 "phone",
-                "linkedin",
                 "option_1",
                 "option_2",
             )
@@ -369,6 +368,7 @@ class GalleryAdmin(admin.ModelAdmin):
             "fields": (
                 "title",
                 "text",
+                "project",
                 "img", 
                 "alt_img",
             )

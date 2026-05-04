@@ -1,0 +1,22 @@
+            {% for photo in photos %}
+            <div class="col-lg-4 col-md-6 gallery-item isotope-item {% if photo.project == Null %}others{% else %}{{photo.project.slug}}{% endif %}">
+              <div class="gallery-wrapper">
+                <img src="{{photo.img.url}}" class="img-fluid" alt="{{photo.alt_img}}">
+                <div class="gallery-overlay">
+                  <div class="gallery-content">
+                    {% if photo.project and photo.project.slug %}
+                    <a href="{% url "portfolio:portfolio-details" photo.project.slug %}">
+                      <h4>{{photo.title}}</h4>
+                    </a>
+                    {% else %}
+                      <h4>{{ photo.title }}</h4>
+                    {% endif %}
+                    <p>{{photo.text}}</p>
+                    <a href="{{photo.img.url}}" class="glightbox gallery-link">
+                      <i class="bi bi-zoom-in"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End Gallery Item -->
+            {% endfor %}

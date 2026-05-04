@@ -23,26 +23,17 @@
         </div>
 
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-
-          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="300">
-            {% for photo in photos %}
-            <div class="col-lg-4 col-md-6 gallery-item isotope-item filter-rooms">
-              <div class="gallery-wrapper">
-                <img src="{{photo.img.url}}" class="img-fluid" alt="{{photo.alt_img}}">
-                <div class="gallery-overlay">
-                  <div class="gallery-content">
-                    <h4>{{photo.title}}</h4>
-                    <p>{{photo.text}}</p>
-                    <a href="{{photo.img.url}}" class="glightbox gallery-link">
-                      <i class="bi bi-zoom-in"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End Gallery Item -->
+          <ul class="gallery-filters isotope-filters aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+            <li data-filter="*" class="filter-active">Всі</li>
+            {% for p in portfolio %}
+            <li data-filter=".{{p.slug}}">{{p.name}}</li>
             {% endfor %}
+            {% if photo.project.all == Null %}<li data-filter=".others">Інше</li>{% endif %}
+          </ul>
+      
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="300">
 
-
+            {% include "main/includes/gallery_items.html" %}
           </div><!-- End Gallery Items Container -->
 
         </div>
@@ -50,7 +41,7 @@
       </div>
 
     </section><!-- /Gallery Section -->
-{% if photos.paginator.num_pages > 1 %}
+ {% if photos.paginator.num_pages > 1 %}
 
 <section id="category-pagination" class="category-pagination section">
 
@@ -59,7 +50,7 @@
              data-aos="fade-up"
              data-aos-delay="100">
 
-            <!-- Page info -->
+        
 
             <div class="page-info">
                 Сторінка
@@ -72,7 +63,7 @@
 
                 <div class="pagination-track">
 
-                    <!-- Previous -->
+                 
 
                     {% if photos.has_previous %}
                     <a href="?page={{ photos.previous_page_number }}"
@@ -85,7 +76,7 @@
                     {% endif %}
 
 
-                    <!-- Page numbers -->
+                
 
                     <div class="page-numbers">
 
@@ -112,7 +103,7 @@
                     </div>
 
 
-                    <!-- Next -->
+               
 
                     {% if photos.has_next %}
                     <a href="?page={{ photos.next_page_number }}"

@@ -16,6 +16,11 @@ from portfolio.models import Portfolio
 from services.models import Service
 
 
+
+from django.template.loader import render_to_string
+from django.http import HttpResponse
+
+
 class Home(View):
 
     def get(self, request):
@@ -187,7 +192,9 @@ class Gallery(View):
 
         photos_list = G.objects.all()
 
-        paginator = Paginator(photos_list, 9)
+        portfolio = Portfolio.objects.all()
+
+        paginator = Paginator(photos_list, 45)
 
         page_number = request.GET.get("page")
 
@@ -197,6 +204,8 @@ class Gallery(View):
             "title_h1": "Галерея",
             "breadcrumbs": "Галерея",
             "photos": photos,
+            "portfolio": portfolio
         }
+
 
         return render(request, "main/gallery.html", context)

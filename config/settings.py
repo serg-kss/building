@@ -166,6 +166,9 @@ if DEBUG:
 else:
     MEDIA_ROOT = "/var/data/media"
 
+#DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800
+#FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
