@@ -3,6 +3,7 @@ from django.views import View
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 
+from config import settings
 from main.models import (
     AboutPage,
     ContactMessages,
@@ -19,6 +20,7 @@ from services.models import Service
 
 from django.template.loader import render_to_string
 from django.http import HttpResponse
+import requests
 
 
 class Home(View):
@@ -78,6 +80,7 @@ class Contact(View):
         email = request.POST.get("email", "").strip()
         subject = request.POST.get("subject", "").strip()
         message = request.POST.get("message", "").strip()
+        phone = request.POST.get("phone", "").strip()
 
         # проверка обязательных полей
         if not all([name, email, subject, message]):
@@ -99,6 +102,34 @@ class Contact(View):
             subject=subject,
             message=message,
         )
+
+        text = (
+            "📩 Нове повідомлення на БІЛДІНГ ЕСТЕЙТ\n\n"
+            f"👤 Імʼя: {name}\n"
+            f"📧 Email: {email}\n"
+            f"📧 Тел: {phone}\n"
+            f"📌 Тема: {subject}\n\n"
+            f"💬 Повідомлення:\n{message}"
+        )
+
+        telegram_url = f"https://api.telegram.org/bot{settings.TELEGRAM_BOT_TOKEN}/sendMessage"
+
+        payload = {
+            "chat_id": settings.TELEGRAM_CHAT_ID,
+            "text": text,
+          
+        }
+
+        try:
+            response = requests.post(
+                telegram_url,
+                data=payload,
+                timeout=5
+            )
+            response.raise_for_status()
+        except requests.RequestException as e:
+            print("Telegram error:", e)
+            return HttpResponse("Failed", status=500)
 
         return JsonResponse({"status": "success"})
 
