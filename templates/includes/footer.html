@@ -36,9 +36,10 @@
           <p>Україна</p>
           <p class="mt-4">
             <strong>Тел:</strong>
-            <span>
+            <a href="tel:{{ site_phone|cut:' '|cut:'-'|cut:'(' |cut:')' }}"
+              class="text-decoration-none text-reset">
               {{ site_phone }}
-            </span>
+            </a>
           </p>
           <p>
             <strong>Email:</strong>
