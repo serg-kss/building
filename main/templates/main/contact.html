@@ -38,7 +38,7 @@
                 </div>
                 <div class="card-content">
                   <h4>Email:</h4>
-                  <p>{{site_email}}</p>
+                  <a href="mailto:{{ site_email }}">{{ site_email }}</a>
                 </div>
               </div>
 
@@ -48,7 +48,10 @@
                 </div>
                 <div class="card-content">
                   <h4>Тел:</h4>
-                  <p>{{site_phone}}</p>
+                  <a href="tel:{{ site_phone|cut:' '|cut:'-'|cut:'(' |cut:')' }}"
+                     class="text-decoration-none text-reset">
+                    {{ site_phone }}
+                  </a>
                 </div>
               </div>
 

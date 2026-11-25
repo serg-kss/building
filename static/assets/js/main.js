@@ -1,11 +1,3 @@
-/**
-* Template Name: Constructo
-* Template URL: https://bootstrapmade.com/constructo-bootstrap-construction-template/
-* Updated: Aug 30 2025 with Bootstrap v5.3.8
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
 (function() {
   "use strict";
 

@@ -50,13 +50,13 @@ class Home(View):
 
         return render(request, "main/index.html", context)
 
-    def post(self, request):
+    #def post(self, request):
 
-        name = request.POST.get("name")
+        #name = request.POST.get("name")
 
-        # ... твоя логика формы
+        # логика формы
 
-        return JsonResponse({"status": "success"})
+        #return JsonResponse({"status": "success"})
 
 
 class Contact(View):
